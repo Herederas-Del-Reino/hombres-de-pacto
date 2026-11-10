@@ -64,6 +64,7 @@ export function render(main) {
   const verano = esVeranoEspana();
   main.innerHTML = `
     ${pageHead({
+      image: 'adoracion',
       eyebrow: 'Hombres de Pacto',
       title: 'Nuestros Encuentros',
       subtitle: 'Un mismo propósito: crecer en nuestra relación con Dios, fortalecer nuestra fe y caminar como hombres de pacto.',

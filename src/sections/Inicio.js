@@ -1,6 +1,6 @@
 import { asset, picture } from '../utils/dom.js';
 import { icon } from '../components/Icons.js';
-import { mountains, divider } from '../components/Visuals.js';
+import { mountains, divider, ornaments, goldRule } from '../components/Visuals.js';
 import { nextMeetingCard, countrySelector, bindCountrySelector, startCountdowns } from '../components/Schedule.js';
 import { store, desafiosCumplidos, altarCompletados } from '../utils/storage.js';
 import { progressBar } from '../components/ProgressBar.js';
@@ -44,10 +44,13 @@ export function render(main) {
   main.innerHTML = `
   <section class="hero" aria-labelledby="page-title">
     <div class="hero__sky" aria-hidden="true"></div>
+    <div class="hero__photo" aria-hidden="true" style="background-image:url('${asset('images/adoracion.webp')}')"></div>
     ${mountains({ className: 'hero__mountains' })}
+    ${ornaments()}
     <div class="hero__inner container">
       <img class="hero__logo" src="${asset('images/logo.webp')}" alt="Logo oficial de Hombres de Pacto: yelmo, espada, montañas, escudo y Biblia abierta" width="670" height="705" fetchpriority="high" />
       <h1 id="page-title" class="hero__title" tabindex="-1"><span>Hombres de</span> Pacto</h1>
+      ${goldRule('gold-rule--hero')}
       <p class="hero__lema">Hombres restaurados, comprometidos con Dios y sus familias.</p>
       <p class="hero__frase">No solamente lo declaramos. <em>Lo vivimos.</em></p>
       <div class="hero__ctas">
@@ -71,6 +74,10 @@ export function render(main) {
         <h2 id="bienvenida" class="h2">Bienvenido a Hombres de Pacto</h2>
         ${divider('divider--left')}
         <p class="lead">No estás aquí por casualidad. Estás aquí porque creemos que Dios sigue levantando hombres dispuestos a ser transformados desde adentro.</p>
+        <figure class="framed-photo">
+          ${picture('adoracion', 'Hombres y mujeres en adoración durante un servicio', { sizes: '(max-width: 900px) 90vw, 35vw' })}
+          <figcaption>Adoración en comunidad</figcaption>
+        </figure>
       </div>
       <div class="welcome__body reading">
         <p class="reveal">Hombres que entienden que la verdadera fortaleza no está en imponer su autoridad, sino en aprender a amar, servir, proteger, cuidar y permanecer fieles a Dios.</p>
@@ -81,6 +88,15 @@ export function render(main) {
         <p class="welcome__family reveal">Bienvenido a esta familia.</p>
         <p class="welcome__sign reveal"><strong>Somos Hombres de Pacto.</strong> No solamente lo declaramos, lo vivimos.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="motto-band" aria-label="Nuestra convicción">
+    <div class="motto-band__img" aria-hidden="true" style="background-image:url('${asset('images/ministracion-oracion.webp')}')"></div>
+    <div class="container motto-band__inner reveal">
+      ${goldRule()}
+      <p class="motto-band__text">No solamente lo declaramos.<br /><span>Lo vivimos.</span></p>
+      ${goldRule()}
     </div>
   </section>
 

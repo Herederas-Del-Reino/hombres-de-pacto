@@ -1,0 +1,188 @@
+/* =====================================================================
+   IDENTIDAD «HOMBRES DE PACTO»: líneas doradas, marcos grabados,
+   textura de piedra oscura y fotografías reales del ministerio.
+   Se carga al final y refina los estilos base.
+   ===================================================================== */
+
+:root {
+  --radius: 6px;
+  --radius-lg: 8px;
+  --gold-line: linear-gradient(90deg, transparent, rgba(212, 175, 55, .9) 18%, #f3dc8a 50%, rgba(212, 175, 55, .9) 82%, transparent);
+  --gold-line-v: linear-gradient(180deg, transparent, rgba(212, 175, 55, .8) 20%, #f3dc8a 50%, rgba(212, 175, 55, .8) 80%, transparent);
+  --hair: rgba(212, 175, 55, .42);
+  --hair-soft: rgba(212, 175, 55, .16);
+}
+
+/* ---------- Textura de piedra (ruido fino) ---------- */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .95 0 0 0 0 .85 0 0 0 0 .7 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(120% 80% at 50% 0%, rgba(27, 46, 75, .35), transparent 60%),
+    var(--carbon);
+}
+body { background: transparent; }
+html { background: var(--carbon); }
+
+/* ---------- Línea dorada con rombo ---------- */
+.gold-rule { display: flex; align-items: center; gap: .75rem; width: min(100%, 420px); margin: 1.1rem auto; }
+.gold-rule span { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--oro)); }
+.gold-rule span:last-child { background: linear-gradient(90deg, var(--oro), transparent); }
+.gold-rule b { width: 9px; height: 9px; transform: rotate(45deg); border: 1px solid var(--oro); background: var(--carbon); box-shadow: 0 0 10px rgba(212, 175, 55, .6); flex: none; }
+.gold-rule--hero { width: min(100%, 520px); margin: 1.4rem auto .2rem; }
+
+/* ---------- Marco dorado doble con esquinas (portada y encabezados) ---------- */
+.gold-frame { position: absolute; inset: 14px; pointer-events: none; z-index: 1; border: 1px solid var(--hair); }
+.gold-frame::before { content: ''; position: absolute; inset: 6px; border: 1px solid var(--hair-soft); }
+.gold-frame i { position: absolute; width: 34px; height: 34px; border-color: var(--oro); border-style: solid; border-width: 0; filter: drop-shadow(0 0 6px rgba(212, 175, 55, .55)); }
+.gold-frame i:nth-child(1) { top: -1px; left: -1px; border-top-width: 2px; border-left-width: 2px; }
+.gold-frame i:nth-child(2) { top: -1px; right: -1px; border-top-width: 2px; border-right-width: 2px; }
+.gold-frame i:nth-child(3) { bottom: -1px; left: -1px; border-bottom-width: 2px; border-left-width: 2px; }
+.gold-frame i:nth-child(4) { bottom: -1px; right: -1px; border-bottom-width: 2px; border-right-width: 2px; }
+
+/* ---------- Destellos diagonales de luz dorada ---------- */
+.streaks { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.streaks i { position: absolute; height: 1px; width: 70%; background: var(--gold-line); transform: rotate(-32deg); opacity: .55; filter: drop-shadow(0 0 4px rgba(243, 220, 138, .9)); }
+.streaks i:nth-child(1) { top: 12%; left: -42%; }
+.streaks i:nth-child(2) { top: 20%; left: -48%; width: 50%; opacity: .3; }
+.streaks i:nth-child(3) { bottom: 18%; right: -40%; transform: rotate(-32deg); opacity: .45; }
+@media (prefers-reduced-motion: no-preference) {
+  .streaks i:nth-child(1) { animation: streak 7s ease-in-out infinite alternate; }
+  .streaks i:nth-child(3) { animation: streak 9s ease-in-out infinite alternate-reverse; }
+}
+@keyframes streak { from { opacity: .2; } to { opacity: .7; } }
+
+/* ---------- Portada ---------- */
+.hero__photo {
+  position: absolute; inset: 0; z-index: -2; background-size: cover; background-position: 50% 30%;
+  opacity: .2; filter: grayscale(.55) sepia(.35) contrast(1.1);
+  -webkit-mask-image: radial-gradient(70% 60% at 50% 40%, #000 30%, transparent 85%);
+  mask-image: radial-gradient(70% 60% at 50% 40%, #000 30%, transparent 85%);
+}
+.hero__sky { z-index: -3; }
+.hero__inner { position: relative; z-index: 2; }
+.hero__title span { display: flex; align-items: center; justify-content: center; gap: .9rem; }
+.hero__title span::before, .hero__title span::after { content: ''; height: 1px; width: clamp(24px, 8vw, 90px); background: linear-gradient(90deg, transparent, var(--oro)); }
+.hero__title span::after { background: linear-gradient(90deg, var(--oro), transparent); }
+.hero__verse { position: relative; padding: 1.1rem 1.6rem; border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair); }
+
+/* ---------- Encabezados de sección con foto real ---------- */
+.page-head { isolation: isolate; background: radial-gradient(900px 420px at 50% 100%, rgba(212, 175, 55, .1), transparent 70%), linear-gradient(180deg, #0d1219, transparent); }
+.page-head__img {
+  position: absolute; inset: 0; z-index: -3; background-size: cover; background-position: 50% 35%;
+  opacity: .38; filter: grayscale(.45) sepia(.3) contrast(1.1) brightness(.85);
+}
+.page-head--image::before {
+  content: ''; position: absolute; inset: 0; z-index: -2;
+  background: linear-gradient(180deg, rgba(11, 13, 16, .55) 0%, rgba(11, 13, 16, .7) 60%, rgba(11, 13, 16, 0) 100%),
+              radial-gradient(70% 60% at 50% 45%, transparent, rgba(11, 13, 16, .7));
+}
+.page-head__inner { z-index: 2; }
+.page-head .eyebrow { display: inline-flex; align-items: center; gap: .8rem; }
+.page-head .eyebrow::before, .page-head .eyebrow::after { content: ''; width: 34px; height: 1px; background: var(--oro); }
+
+/* ---------- Títulos de sección: etiqueta enmarcada + línea ---------- */
+.section-head .eyebrow {
+  display: inline-block; padding: .4rem 1.05rem; border: 1px solid var(--oro);
+  transform: skewX(-14deg); background: rgba(212, 175, 55, .06); box-shadow: 0 0 18px -6px rgba(212, 175, 55, .6);
+}
+.section-head::after { content: ''; display: block; height: 1px; max-width: 460px; margin-top: 1.1rem; background: linear-gradient(90deg, var(--oro), rgba(212, 175, 55, .25) 60%, transparent); }
+.welcome__head .eyebrow { display: inline-block; padding: .4rem 1.05rem; border: 1px solid var(--oro); transform: skewX(-14deg); background: rgba(212, 175, 55, .06); }
+
+/* ---------- Separadores entre secciones ---------- */
+.section--alt { border-top: 0; border-bottom: 0; }
+.section--alt::before, .section--alt::after { content: ''; position: absolute; left: 0; right: 0; height: 1px; background: var(--gold-line); opacity: .7; }
+.section--alt::before { top: 0; }
+.section--alt::after { bottom: 0; }
+.site-footer { border-top: 0; position: relative; }
+.site-footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--gold-line); }
+.site-header.is-scrolled { border-bottom-color: transparent; box-shadow: 0 1px 0 rgba(212, 175, 55, .45); }
+
+/* ---------- Tarjetas grabadas: doble línea dorada + esquinas ---------- */
+:is(.access-card, .next-card, .altar-part, .challenge, .meeting, .facts, .family, .social-card, .pillar,
+    .category, .form-frame, .note-card, .verse-card, .my-progress, .path-progress, .cta-band, .continue-card,
+    .finale, .cert-form, .table-wrap, .modal__dialog) {
+  border-color: var(--hair);
+  outline: 1px solid var(--hair-soft);
+  outline-offset: -6px;
+}
+:is(.access-card, .next-card, .altar-part, .challenge, .facts, .family, .social-card, .pillar, .category,
+    .note-card, .verse-card, .my-progress, .path-progress, .cta-band, .finale, .cert-form, .meeting) { position: relative; }
+:is(.access-card, .next-card, .altar-part, .challenge, .facts, .family, .social-card, .pillar, .category,
+    .note-card, .verse-card, .my-progress, .path-progress, .cta-band, .finale, .cert-form, .meeting)::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 2; border-radius: inherit;
+  --l: 20px; --t: 2px; --g: var(--oro);
+  background:
+    linear-gradient(var(--g), var(--g)) top left / var(--l) var(--t),
+    linear-gradient(var(--g), var(--g)) top left / var(--t) var(--l),
+    linear-gradient(var(--g), var(--g)) top right / var(--l) var(--t),
+    linear-gradient(var(--g), var(--g)) top right / var(--t) var(--l),
+    linear-gradient(var(--g), var(--g)) bottom left / var(--l) var(--t),
+    linear-gradient(var(--g), var(--g)) bottom left / var(--t) var(--l),
+    linear-gradient(var(--g), var(--g)) bottom right / var(--l) var(--t),
+    linear-gradient(var(--g), var(--g)) bottom right / var(--t) var(--l);
+  background-repeat: no-repeat;
+  width: auto; height: auto; right: 0; top: 0; border: 0;
+}
+/* La tarjeta de encuentros usaba ::after como resplandor: se mueve a ::before */
+.meeting::before { content: ''; position: absolute; right: -60px; top: -60px; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(212, 175, 55, .16), transparent 70%); pointer-events: none; }
+/* Línea superior luminosa en los bloques principales */
+:is(.altar-part, .challenge, .meeting, .next-card, .facts, .form-frame) { box-shadow: inset 0 1px 0 rgba(243, 220, 138, .35), var(--shadow); }
+
+/* ---------- Pilares: columna dorada ---------- */
+.pillar::before { width: 2px; background: var(--gold-line-v); }
+
+/* ---------- Recorrido de desafíos ---------- */
+.path::before { background: var(--gold-line-v); opacity: .8; width: 1px; left: 26px; }
+.station__node { box-shadow: 0 0 0 3px var(--carbon), 0 0 0 4px var(--hair); }
+.station--cumplido .station__node { box-shadow: 0 0 0 3px var(--carbon), 0 0 0 4px var(--oro), 0 0 18px rgba(212, 175, 55, .5); }
+@media (min-width: 760px) {
+  .station__card::before { content: ''; position: absolute; left: 18%; right: 18%; top: 0; height: 1px; background: var(--gold-line); opacity: .6; }
+  .station--cumplido .station__card::before { opacity: 1; }
+  .station__card { border-color: var(--hair-soft); outline: 1px solid var(--hair-soft); outline-offset: -6px; }
+  .station__icon { border-color: var(--hair); box-shadow: inset 0 0 0 4px var(--carbon), inset 0 0 0 5px var(--hair-soft); }
+}
+
+/* ---------- Pestañas de días ---------- */
+.day-tab { border-radius: 4px; border-color: var(--hair); }
+
+/* ---------- Foto enmarcada (bienvenida) ---------- */
+.framed-photo { position: relative; margin: 2rem 0 0; padding: 10px; border: 1px solid var(--hair); max-width: 440px; }
+.framed-photo::before { content: ''; position: absolute; inset: -8px 8px 8px -8px; border: 1px solid var(--hair-soft); z-index: -1; }
+.framed-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; filter: saturate(.9) contrast(1.05); }
+.framed-photo figcaption { position: absolute; left: 10px; right: 10px; bottom: 10px; padding: 1.6rem .9rem .7rem; font-size: var(--fs-xs); letter-spacing: .18em; text-transform: uppercase; color: var(--oro-claro); background: linear-gradient(180deg, transparent, rgba(11, 13, 16, .92)); }
+
+/* ---------- Banda de lema con fotografía ---------- */
+.motto-band { position: relative; isolation: isolate; overflow: hidden; padding: clamp(4rem, 3rem + 5vw, 7rem) 0; text-align: center; }
+.motto-band::before, .motto-band::after { content: ''; position: absolute; left: 0; right: 0; height: 1px; background: var(--gold-line); z-index: 1; }
+.motto-band::before { top: 0; }
+.motto-band::after { bottom: 0; }
+.motto-band__img { position: absolute; inset: 0; z-index: -2; background-size: cover; background-position: 50% 25%; filter: grayscale(.45) sepia(.35) brightness(.6) contrast(1.1); }
+.motto-band__inner::before { content: ''; position: absolute; inset: 0; z-index: -1; }
+.motto-band__inner::before { background: radial-gradient(70% 90% at 50% 50%, rgba(11, 13, 16, .25), rgba(11, 13, 16, .8)); }
+.motto-band__inner { position: static; }
+.motto-band__text { font-family: var(--f-display); font-weight: 900; text-transform: uppercase; letter-spacing: .05em; line-height: 1.15; font-size: clamp(1.6rem, 1rem + 3.4vw, 3.4rem); margin: .5rem 0; color: var(--marfil); text-shadow: 0 4px 30px rgba(0, 0, 0, .8); }
+.motto-band__text span { background: var(--metal-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ---------- Retrato del pastor ---------- */
+.pastor-hero { isolation: isolate; }
+.pastor-hero__grid { position: relative; z-index: 2; }
+.pastor-hero__portrait { padding: 10px; border: 1px solid var(--hair); }
+.pastor-hero__portrait::before { inset: 22px -16px -16px 22px; border-color: var(--hair-soft); border-radius: 0; }
+.pastor-hero__portrait img { border-radius: 0; }
+
+/* ---------- Galerías con filete dorado ---------- */
+.gallery__item, .masonry__item { border-radius: 2px; border-color: var(--hair-soft); }
+.gallery__item::after, .masonry__item::after { content: ''; position: absolute; inset: 6px; border: 1px solid rgba(241, 230, 216, .0); transition: border-color .3s; pointer-events: none; }
+.gallery__item:hover::after, .masonry__item:hover::after { border-color: rgba(212, 175, 55, .7); }
+
+/* ---------- Encabezado: línea dorada bajo el menú activo ---------- */
+.mainnav a.is-active { background: none; color: var(--oro-claro); box-shadow: inset 0 -1px 0 var(--oro); border-radius: 0; }
+.mainnav a { border-radius: 0; }
+
+/* Ajustes móviles */
+@media (max-width: 559px) {
+  .gold-frame { inset: 8px; }
+  .gold-frame i { width: 22px; height: 22px; }
+  .streaks i:nth-child(2) { display: none; }
+}

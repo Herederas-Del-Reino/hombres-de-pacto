@@ -108,6 +108,7 @@ export function render(main, params, ctx) {
 
   main.innerHTML = `
     ${pageHead({
+      image: 'predicando-escenario-2',
       eyebrow: 'Hombres de Pacto',
       title: 'Vuelve al Altar',
       subtitle: 'Un encuentro diario con Dios',

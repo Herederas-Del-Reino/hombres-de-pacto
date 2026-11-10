@@ -11,6 +11,7 @@ const EMBED_URL = `https://docs.google.com/forms/d/e/${FORM_ID}/viewform?embedde
 export function render(main) {
   main.innerHTML = `
     ${pageHead({
+      image: 'ministracion-oracion',
       eyebrow: 'Oración y contacto',
       title: 'No camines solo',
       subtitle: 'Queremos acompañarte en oración.',

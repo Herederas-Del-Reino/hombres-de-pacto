@@ -9,6 +9,7 @@ export const meta = { title: 'Nuestra Comunidad' };
 export function render(main) {
   main.innerHTML = `
     ${pageHead({
+      image: 'equipo-evangelismo',
       eyebrow: 'Nuestra comunidad',
       title: 'Una familia de hombres con propósito',
       intro: '<p>Hombres de Pacto es una comunidad de crecimiento espiritual donde buscamos fortalecer nuestra relación con Dios, desarrollar un carácter conforme a Cristo y vivir nuestra fe en el hogar y en la sociedad.</p>',

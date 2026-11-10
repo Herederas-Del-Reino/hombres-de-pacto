@@ -36,6 +36,7 @@ function grid(filtro) {
 export function render(main) {
   main.innerHTML = `
     ${pageHead({
+      image: 'predicando-iglesia',
       eyebrow: 'Biblioteca digital',
       title: 'Recursos y Enseñanzas',
       subtitle: 'Material para crecer en la fe, en el hogar y en el carácter.',

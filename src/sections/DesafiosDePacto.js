@@ -35,6 +35,7 @@ function pathView() {
   const n = desafiosCumplidos();
   return `
     ${pageHead({
+      image: 'evangelismo-calle',
       eyebrow: 'Hombres de Pacto',
       title: 'Desafíos de Pacto',
       subtitle: '25 días para transformar tu vida',

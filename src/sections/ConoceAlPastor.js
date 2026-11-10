@@ -1,7 +1,7 @@
 import { pastor } from '../data/pastor.js';
 import { esc, picture, asset } from '../utils/dom.js';
 import { icon, brand } from '../components/Icons.js';
-import { divider, mountains } from '../components/Visuals.js';
+import { divider, mountains, ornaments } from '../components/Visuals.js';
 import { bindLightbox } from '../components/Lightbox.js';
 
 export const meta = { title: 'Conoce al Pastor' };
@@ -17,6 +17,7 @@ export function render(main) {
   main.innerHTML = `
   <section class="pastor-hero">
     ${mountains({ className: 'pastor-hero__mountains' })}
+    ${ornaments()}
     <div class="container pastor-hero__grid">
       <figure class="pastor-hero__portrait reveal">
         ${picture(pastor.retrato.img, pastor.retrato.alt, { eager: true, sizes: '(max-width: 900px) 90vw, 40vw' })}

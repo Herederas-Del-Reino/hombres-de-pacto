@@ -5,7 +5,7 @@
 
 Plataforma web y aplicación instalable (PWA) del ministerio Hombres de Pacto.
 
-🌐 **Sitio publicado:** https://nataliaaldanaflz-svg.github.io/hombres-de-pacto/
+🌐 **Sitio publicado:** <URL-del-sitio>
 
 ## Secciones
 
@@ -63,7 +63,7 @@ npm run preview      # sirve dist/ en http://localhost:4173/hombres-de-pacto/
 npm run test:e2e     # con preview en marcha: pruebas de extremo a extremo (Playwright)
 ```
 
-`BASE_URL=https://nataliaaldanaflz-svg.github.io/hombres-de-pacto/ npm run test:e2e` ejecuta las mismas pruebas sobre el sitio publicado.
+`BASE_URL=<URL-del-sitio> npm run test:e2e` ejecuta las mismas pruebas sobre el sitio publicado.
 
 ## Despliegue
 

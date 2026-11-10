@@ -1,5 +1,11 @@
 /** Elementos visuales de marca: montañas, divisores, banderas y encabezados de sección. */
-import { esc } from '../utils/dom.js';
+import { esc, asset } from '../utils/dom.js';
+
+/** Marco dorado doble con esquinas y destellos diagonales (decorativo). */
+export const ornaments = ({ streaks = true } = {}) => `<div class="gold-frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>${streaks ? '<div class="streaks" aria-hidden="true"><i></i><i></i><i></i></div>' : ''}`;
+
+/** Línea dorada con rombo central. */
+export const goldRule = (cls = '') => `<div class="gold-rule ${cls}" aria-hidden="true"><span></span><b></b><span></span></div>`;
 
 /** Cordillera en capas con luz dorada (vectorial, sin imágenes externas). */
 export function mountains({ className = '', glow = true } = {}) {
@@ -39,8 +45,9 @@ export const divider = (className = '') => `<div class="divider ${className}" ar
 /** Encabezado editorial común a todas las secciones. */
 export function pageHead({ eyebrow = '', title, subtitle = '', intro = '', id = 'page-title', image = '' }) {
   return `<header class="page-head ${image ? 'page-head--image' : ''}">
-    ${image ? `<div class="page-head__img" style="background-image:url('${image}')" aria-hidden="true"></div>` : ''}
-    ${mountains({ className: 'page-head__mountains' })}
+    ${image ? `<div class="page-head__img" style="background-image:url('${asset(`images/${image}.webp`)}')" aria-hidden="true"></div>` : ''}
+    ${mountains({ className: 'page-head__mountains', glow: !image })}
+    ${ornaments()}
     <div class="container page-head__inner reveal">
       ${eyebrow ? `<p class="eyebrow">${esc(eyebrow)}</p>` : ''}
       <h1 id="${id}" class="page-head__title" tabindex="-1">${title}</h1>
