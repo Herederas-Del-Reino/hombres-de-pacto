@@ -334,3 +334,36 @@
 }
 
 .quote-xl { clear: both; }
+
+/* ---------- Portada legible (la luz no compite con el texto) ---------- */
+.hero3__scene .scene__img { filter: brightness(.72) saturate(1.05); }
+.hero3__veil {
+  background:
+    radial-gradient(60% 75% at 50% 55%, rgba(11, 13, 16, .62), rgba(11, 13, 16, .2) 75%),
+    linear-gradient(180deg, rgba(11, 13, 16, .55) 0%, rgba(11, 13, 16, .2) 30%, rgba(11, 13, 16, .35) 65%, rgba(11, 13, 16, .92) 100%);
+}
+.hero3__mark { position: relative; }
+.hero3__mark::before { content: ''; position: absolute; inset: -18% -22%; z-index: -1; background: radial-gradient(closest-side, rgba(11, 13, 16, .85), rgba(11, 13, 16, .55) 55%, transparent); pointer-events: none; }
+.hero3__lema { color: #fff7ea; text-shadow: 0 1px 2px rgba(0, 0, 0, .9), 0 0 18px rgba(0, 0, 0, .85); }
+.hero3__frase, .hero3__kicker, .hero3__verse p, .hero3__verse cite, .hero3__ctas .link-arrow { text-shadow: 0 1px 2px rgba(0, 0, 0, .9), 0 0 16px rgba(0, 0, 0, .8); }
+.hero3__pre { text-shadow: 0 2px 14px rgba(0, 0, 0, .9); }
+.hero3__title { filter: drop-shadow(0 4px 18px rgba(0, 0, 0, .85)); }
+.hero3__ctas .btn--outline { background: rgba(11, 13, 16, .55); backdrop-filter: blur(4px); }
+@media (min-width: 960px) {
+  .hero3__veil {
+    background:
+      linear-gradient(90deg, rgba(11, 13, 16, .3) 0%, rgba(11, 13, 16, .35) 38%, rgba(11, 13, 16, .78) 58%, rgba(11, 13, 16, .82) 100%),
+      linear-gradient(180deg, rgba(11, 13, 16, .4) 0%, transparent 25%, transparent 70%, rgba(11, 13, 16, .9) 100%);
+  }
+  .hero3__verse { background: rgba(11, 13, 16, .45); backdrop-filter: blur(4px); border-radius: 4px; }
+}
+/* Equilibrio: luz del amanecer junto al logo, sombra solo tras el texto */
+.hero3__scene .scene__img { filter: brightness(.88) saturate(1.08); }
+.hero3__mark::before { background: radial-gradient(closest-side, rgba(11, 13, 16, .55), rgba(11, 13, 16, .25) 60%, transparent); }
+@media (min-width: 960px) {
+  .hero3__veil {
+    background:
+      linear-gradient(90deg, rgba(11, 13, 16, .05) 0%, rgba(11, 13, 16, .12) 35%, rgba(11, 13, 16, .7) 56%, rgba(11, 13, 16, .8) 100%),
+      linear-gradient(180deg, rgba(11, 13, 16, .35) 0%, transparent 22%, transparent 72%, rgba(11, 13, 16, .9) 100%);
+  }
+}
