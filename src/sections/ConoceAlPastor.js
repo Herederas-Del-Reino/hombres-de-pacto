@@ -2,7 +2,6 @@ import { pastor } from '../data/pastor.js';
 import { esc, picture } from '../utils/dom.js';
 import { icon, brand } from '../components/Icons.js';
 import { ornaments, goldRule } from '../components/Visuals.js';
-import { landscape } from '../components/Landscape.js';
 import { bindLightbox } from '../components/Lightbox.js';
 
 export const meta = { title: 'Conoce al Pastor' };
@@ -17,7 +16,6 @@ export function render(main) {
   const b = pastor.biografia;
   main.innerHTML = `
   <section class="pastor3" aria-labelledby="page-title">
-    ${landscape('ember', { className: 'pastor3__scene', rays: false })}
     <figure class="pastor3__portrait">
       ${picture(pastor.retrato.img, pastor.retrato.alt, { eager: true, sizes: '(max-width: 900px) 100vw, 50vw' })}
     </figure>
@@ -41,7 +39,7 @@ export function render(main) {
       <div class="bio3__text">
         <p class="kicker reveal">Biografía</p>
         <h2 id="bio" class="display reveal">Un siervo de Dios <span>comprometido</span></h2>
-        <p class="lead dropcap reveal">${esc(b[1])}</p>
+        <p class="lead dropcap reveal">${esc(b[1])} ${esc(b[2])}</p>
         <blockquote class="quote-xl reveal"><p>${esc(b[3])}</p></blockquote>
         <div class="columns reveal">
           <p>${esc(b[4])}</p>

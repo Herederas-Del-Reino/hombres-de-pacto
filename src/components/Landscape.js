@@ -80,3 +80,19 @@ export function landscape(variant = 'dawn', { className = '', sun = true, stars 
     <path d="${RIDGES[3]}" fill="${p.layers[3]}"/>
   </svg>`;
 }
+
+/**
+ * Escena pintada (imagen generada por tools/escenas.py) a sangre completa,
+ * con parallax suave y zoom lento. Decorativa.
+ *  nombre: 'amanecer' | 'resplandor' | 'crepusculo' | 'serenidad' | 'etapa-1-valle' … 'etapa-5-cumbre'
+ */
+export function scene(nombre, { className = '', parallax = 0.25, eager = false } = {}) {
+  const base = import.meta.env.BASE_URL;
+  const lg = `${base}images/escenas/${nombre}.webp`;
+  const sm = `${base}images/escenas/${nombre}-sm.webp`;
+  return `<div class="scene ${className}" aria-hidden="true" data-parallax="${parallax}">
+    <img class="scene__img" src="${lg}" srcset="${sm} 900w, ${lg} 2000w" sizes="100vw" alt="" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" />
+  </div>`;
+}
+
+export const SCENES = { dawn: 'amanecer', ember: 'resplandor', night: 'crepusculo', peace: 'serenidad' };

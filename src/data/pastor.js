@@ -6,7 +6,7 @@ export const pastor = {
   retrato: { img: 'pastor-retrato', alt: 'Retrato del pastor Oscar Amarales, de traje oscuro, en Valencia' },
   biografia: [
     'El pastor Oscar Amarales es venezolano y reside actualmente en España.',
-    'Pertenece al ministerio En Su Presencia Valencia, bajo la cobertura de los apóstoles Carlos Hugo Cuéllar y Jenny Paes.',
+    'Pertenece al ministerio En Su Presencia Valencia.',
     'Está casado con la pastora Jennyfer de Amarales y es padre de cinco hijos.',
     'Es un siervo de Dios comprometido con proclamar el mensaje de Jesucristo y recordar que Dios tiene el poder para transformar vidas.',
     'Su vida está enfocada en la fe, la familia y el servicio, inspirando a otros a confiar en las promesas del Señor y caminar con propósito.',
@@ -16,7 +16,6 @@ export const pastor = {
   datos: [
     { icono: 'MapPin', etiqueta: 'Origen y residencia', valor: 'Venezolano, reside actualmente en España' },
     { icono: 'Church', etiqueta: 'Ministerio', valor: 'En Su Presencia Valencia' },
-    { icono: 'Shield', etiqueta: 'Cobertura', valor: 'Apóstoles Carlos Hugo Cuéllar y Jenny Paes' },
     { icono: 'Users', etiqueta: 'Familia', valor: 'Casado con la pastora Jennyfer de Amarales · padre de cinco hijos' },
   ],
   predicacion: [

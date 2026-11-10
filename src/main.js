@@ -5,6 +5,7 @@ import './styles/sections.css';
 import './styles/responsive.css';
 import './styles/brand.css';
 import './styles/theme.css';
+import './styles/v4.css';
 
 import { renderHeader, renderTabbar, setActive, ROUTES } from './components/Navigation.js';
 import { renderFooter } from './components/Footer.js';
@@ -12,6 +13,7 @@ import { initPwa, installApp } from './components/Pwa.js';
 import { openModal, confirmar, toast } from './components/Modal.js';
 import { icon } from './components/Icons.js';
 import { store, desafiosCumplidos, altarCompletados } from './utils/storage.js';
+import { initEffects, applyEffects } from './utils/effects.js';
 
 import * as Inicio from './sections/Inicio.js';
 import * as VuelveAlAltar from './sections/VuelveAlAltar.js';
@@ -38,6 +40,7 @@ const nav = renderHeader(document.getElementById('site-header'));
 renderTabbar(document.getElementById('tabbar'));
 renderFooter(document.getElementById('site-footer'));
 initPwa();
+initEffects();
 
 let cleanup = null;
 let current = { route: null, params: [] };
@@ -94,6 +97,7 @@ function render({ keepScroll = false } = {}) {
   if (typeof result === 'function') cleanup = result;
   main.replaceChildren(view);
   observeReveals(view);
+  applyEffects(view);
   setActive(route);
 
   const r = ROUTES.find((x) => x.id === route);

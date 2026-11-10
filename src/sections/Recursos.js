@@ -63,7 +63,7 @@ function disponibles() {
         </a>
         <a class="feature feature--desafios reveal" href="#/desafios" style="--d:80ms">
           <span class="feature__kicker">${icon('Mountain', { size: 16 })} Plan práctico · 25 días</span>
-          <span class="feature__title">Desafíos de Pacto</span>
+          <span class="feature__title">El Camino de Pacto</span>
           <span class="feature__text">25 acciones concretas para transformar tu vida, con reconocimiento al finalizar.</span>
           <span class="feature__meta">${d ? `${d} de 25 cumplidos` : 'Empieza tu camino'} ${icon('ArrowRight', { size: 16 })}</span>
         </a>

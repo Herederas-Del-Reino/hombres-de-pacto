@@ -12,7 +12,7 @@ export function render(main) {
   main.innerHTML = `
     ${pageHead({
       image: 'ministracion-oracion',
-      scene: 'ember',
+      scene: 'peace',
       layout: 'split',
       index: 'VII',
       eyebrow: 'Oración y contacto',

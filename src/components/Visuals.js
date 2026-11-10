@@ -1,9 +1,12 @@
 /** Elementos visuales de marca: montañas, divisores, banderas y encabezados de sección. */
 import { esc, asset } from '../utils/dom.js';
-import { landscape } from './Landscape.js';
+import { scene as sceneImg, SCENES } from './Landscape.js';
 
-/** Marco dorado doble con esquinas y destellos diagonales (decorativo). */
-export const ornaments = ({ streaks = true } = {}) => `<div class="gold-frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>${streaks ? '<div class="streaks" aria-hidden="true"><i></i><i></i><i></i></div>' : ''}`;
+/**
+ * Partículas de luz flotando (polvo en el rayo de sol). Sustituye a los marcos
+ * dorados: la luz destaca momentos, no encierra todo. Decorativo y muy ligero.
+ */
+export const ornaments = ({ count = 14 } = {}) => `<div class="dust" aria-hidden="true">${Array.from({ length: count }, (_, i) => `<i style="--x:${(i * 37) % 100}%;--y:${20 + ((i * 53) % 70)}%;--s:${2 + (i % 3)}px;--t:${9 + (i % 5) * 2}s;--dl:${-(i * 1.3).toFixed(1)}s"></i>`).join('')}</div>`;
 
 /** Línea dorada con rombo central. */
 export const goldRule = (cls = '') => `<div class="gold-rule ${cls}" aria-hidden="true"><span></span><b></b><span></span></div>`;
@@ -53,7 +56,7 @@ export const divider = (className = '') => `<div class="divider ${className}" ar
 export function pageHead({ eyebrow = '', title, subtitle = '', intro = '', id = 'page-title', image = '', scene = 'dawn', layout = 'center', index = '' }) {
   const photo = image ? asset(`images/${image}.webp`) : '';
   return `<header class="ph ph--${layout} ph--${scene}">
-    ${landscape(scene, { className: 'ph__scene' })}
+    ${sceneImg(SCENES[scene] ?? scene, { className: 'ph__scene', eager: true })}
     ${photo && layout === 'center' ? `<div class="ph__photo" style="background-image:url('${photo}')" aria-hidden="true"></div>` : ''}
     <div class="ph__veil" aria-hidden="true"></div>
     ${ornaments()}

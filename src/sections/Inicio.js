@@ -1,11 +1,9 @@
 import { asset, picture, esc } from '../utils/dom.js';
 import { icon } from '../components/Icons.js';
 import { ornaments, goldRule } from '../components/Visuals.js';
-import { landscape } from '../components/Landscape.js';
-import { trail } from '../components/Trail.js';
+import { scene } from '../components/Landscape.js';
 import { nextMeetingCard, countrySelector, bindCountrySelector, startCountdowns } from '../components/Schedule.js';
 import { store, desafiosCumplidos, altarCompletados } from '../utils/storage.js';
-import { desafios } from '../data/desafios.js';
 import { devocionales } from '../data/devocionales.js';
 import { pastor } from '../data/pastor.js';
 
@@ -27,13 +25,12 @@ function progresoPersonal() {
 
 export function render(main) {
   const s = store.get();
-  const estados = desafios.map((d) => s.desafios[d.dia]?.estado ?? 'pendiente');
   const hecho = desafiosCumplidos(s);
   const sigAltar = devocionales.find((d) => !s.altar[d.dia]?.completado) ?? devocionales[0];
 
   main.innerHTML = `
   <section class="hero3" aria-labelledby="page-title">
-    ${landscape('dawn', { className: 'hero3__scene' })}
+    ${scene('amanecer', { className: 'hero3__scene', eager: true, parallax: 0.35 })}
     <div class="hero3__veil" aria-hidden="true"></div>
     ${ornaments()}
     <div class="container hero3__grid">
@@ -105,16 +102,18 @@ export function render(main) {
           </span>
         </a>
         <a class="tile tile--desafios reveal" href="#/desafios" style="--d:80ms">
+          ${scene('etapa-3-ladera', { className: 'tile__scene', parallax: 0.12 })}
+          <span class="tile__shade" aria-hidden="true"></span>
           <span class="tile__body">
-            <span class="tile__tag">${icon('Mountain', { size: 16 })} 25 días · 25 decisiones</span>
-            <span class="tile__title">Desafíos de Pacto</span>
-            <span class="tile__text">${hecho ? `Llevas <strong>${hecho} de 25</strong>. Sigue subiendo.` : 'Un camino de transformación, paso a paso.'}</span>
-            <span class="tile__go">Ver mi camino ${icon('ArrowRight', { size: 16 })}</span>
+            <span class="tile__tag">${icon('Mountain', { size: 16 })} 25 días · 5 etapas</span>
+            <span class="tile__title">El Camino de Pacto</span>
+            <span class="tile__text">${hecho ? `Llevas <strong>${hecho} de 25</strong> estaciones. Sigue subiendo.` : 'Del valle a la cumbre: 25 desafíos para transformar tu vida.'}</span>
+            <span class="tile__meter" aria-hidden="true"><span style="width:${Math.round((hecho / 25) * 100)}%"></span></span>
+            <span class="tile__go">${hecho ? 'Continuar mi camino' : 'Iniciar el camino'} ${icon('ArrowRight', { size: 16 })}</span>
           </span>
-          ${trail(estados, { className: 'tile__trail' })}
         </a>
         <a class="tile tile--encuentros reveal" href="#/encuentros" style="--d:160ms">
-          ${landscape('night', { className: 'tile__scene', rays: false })}
+          ${scene('crepusculo', { className: 'tile__scene', parallax: 0.12 })}
           <span class="tile__body">
             <span class="tile__tag">${icon('Calendar', { size: 16 })} Cada semana</span>
             <span class="tile__title">Nuestros Encuentros</span>
@@ -170,7 +169,7 @@ export function render(main) {
   </section>
 
   <section class="prayer-cta" aria-labelledby="cta-oracion">
-    ${landscape('ember', { className: 'prayer-cta__scene', rays: false })}
+    ${scene('serenidad', { className: 'prayer-cta__scene', parallax: 0.2 })}
     <div class="container prayer-cta__inner reveal">
       <p class="kicker kicker--light">Oración</p>
       <h2 id="cta-oracion" class="display display--light">No camines <span>solo</span></h2>
