@@ -1,0 +1,24 @@
+{
+  "name": "Hombres de Pacto",
+  "short_name": "Hombres de Pacto",
+  "description": "Hombres restaurados, comprometidos con Dios y sus familias.",
+  "lang": "es",
+  "id": "/hombres-de-pacto/",
+  "start_url": "/hombres-de-pacto/#/inicio",
+  "scope": "/hombres-de-pacto/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0B0D10",
+  "theme_color": "#0B0D10",
+  "categories": ["lifestyle", "education", "books"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Vuelve al Altar", "url": "/hombres-de-pacto/#/altar", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Desafíos de Pacto", "url": "/hombres-de-pacto/#/desafios", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Nuestros Encuentros", "url": "/hombres-de-pacto/#/encuentros", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

@@ -1,0 +1,50 @@
+:root {
+  /* Paleta oficial */
+  --carbon: #0B0D10;
+  --azul: #1B2E4B;
+  --pizarra: #4A5568;
+  --bronce: #8B5E2B;
+  --oro: #D4AF37;
+  --marfil: #F1E6D8;
+
+  /* Derivados */
+  --bg: var(--carbon);
+  --bg-2: #10151d;
+  --surface: #141a23;
+  --surface-2: #1a2230;
+  --line: rgba(212, 175, 55, 0.18);
+  --line-soft: rgba(241, 230, 216, 0.09);
+  --text: var(--marfil);
+  --text-2: #cfc4b4;
+  --muted: #a89f92;
+  --oro-claro: #ecd27a;
+  --oro-grad: linear-gradient(135deg, #f3dc8a 0%, #D4AF37 40%, #a8782f 100%);
+  --metal-grad: linear-gradient(180deg, #f6e6b4 0%, #D4AF37 45%, #8B5E2B 100%);
+  --ok: #7cc49a;
+  --danger: #e0806c;
+
+  /* Tipografía */
+  --f-display: 'Cinzel', 'Trajan Pro', Georgia, serif;
+  --f-ui: 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-read: 'Lato', Georgia, serif;
+
+  --fs-xs: 0.8125rem;
+  --fs-sm: 0.9375rem;
+  --fs-md: 1.0625rem;
+  --fs-lg: clamp(1.15rem, 1rem + 0.6vw, 1.35rem);
+  --fs-h4: 1.125rem;
+  --fs-h3: clamp(1.35rem, 1.1rem + 1vw, 1.75rem);
+  --fs-h2: clamp(1.7rem, 1.2rem + 2vw, 2.6rem);
+  --fs-h1: clamp(2.2rem, 1.4rem + 3.6vw, 4rem);
+
+  /* Espaciado y forma */
+  --gutter: 1.25rem;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.75);
+  --shadow-gold: 0 10px 40px -16px rgba(212, 175, 55, 0.45);
+  --header-h: 64px;
+  --tabbar-h: 66px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --container: 1200px;
+}

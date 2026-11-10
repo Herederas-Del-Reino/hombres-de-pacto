@@ -1,0 +1,92 @@
+/* Diseño mobile-first: estas reglas amplían la composición en pantallas mayores. */
+
+@media (min-width: 560px) {
+  :root { --gutter: 1.75rem; }
+  .hero__ctas { flex-direction: row; flex-wrap: wrap; justify-content: center; max-width: 760px; }
+  .access-grid { grid-template-columns: repeat(2, 1fr); }
+  .my-progress__grid { grid-template-columns: 1fr 1fr; }
+  .gallery { grid-template-columns: repeat(3, 1fr); }
+  .gallery--3 .gallery__item:first-child { grid-column: auto; }
+  .gallery--3 .gallery__item:first-child img { aspect-ratio: 4 / 5; }
+  .masonry { columns: 3; }
+  .social-cards { grid-template-columns: repeat(2, 1fr); }
+  .pillars { grid-template-columns: repeat(2, 1fr); }
+  .categories { grid-template-columns: repeat(2, 1fr); }
+  .modal { place-items: center; padding: 1.5rem; }
+  .modal__dialog { border-radius: var(--radius-lg); max-width: 560px; }
+  .modal__dialog--sm { max-width: 440px; }
+  .modal__dialog--xl { max-width: 1100px; }
+  .status-pill { grid-column: auto; justify-self: end; }
+  .challenge__top { grid-template-columns: auto 1fr auto; }
+  .challenge { padding: 2rem; }
+  .altar-part { padding: 2rem; }
+  .next-card { padding: 1.75rem; }
+}
+
+@media (min-width: 760px) {
+  .path { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .path::before { display: none; }
+  .station__card {
+    grid-template-columns: 1fr; grid-template-rows: none; justify-items: center; text-align: center; gap: .4rem;
+    padding: 1.4rem 1rem 1.2rem; min-height: 210px; border: 1px solid var(--line-soft);
+    background: linear-gradient(170deg, #131a26, #0d1117); align-content: start;
+  }
+  .station__card > * { grid-column: auto !important; grid-row: auto !important; }
+  .station__card:hover { border-color: var(--oro); transform: translateY(-3px); background: linear-gradient(170deg, #172031, #0f141c); }
+  .station__card { transition: transform .25s var(--ease), border-color .25s, background .25s; }
+  .station__node { position: absolute; top: .75rem; left: .75rem; width: 38px; height: 38px; font-size: .95rem; }
+  .station__icon { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; color: var(--oro); background: rgba(212, 175, 55, .08); border: 1px solid var(--line); margin: .5rem 0 .35rem; }
+  .station--cumplido .station__card { border-color: rgba(212, 175, 55, .55); background: radial-gradient(240px 120px at 50% 0%, rgba(212, 175, 55, .16), transparent 70%), #10151d; }
+  .station--proceso .station__card { border-color: rgba(212, 175, 55, .35); }
+  .station__state { margin-top: auto; }
+  .next-wrap { grid-template-columns: 1fr 1fr; }
+  .meet-top { grid-template-columns: auto 1fr; align-items: end; gap: 2rem; }
+  .meetings { grid-template-columns: 1fr 1fr; }
+  .family { grid-template-columns: auto 1fr; align-items: start; padding: 2.5rem; }
+  .cta-band { padding: 2.5rem 3rem; }
+  .site-footer__grid { grid-template-columns: 1.4fr 1fr 1fr; }
+}
+
+@media (min-width: 960px) {
+  :root { --header-h: 76px; }
+  body { padding-bottom: 0; }
+  .tabbar { display: none; }
+  #toast-root { bottom: 24px; }
+  .hero { min-height: calc(100svh - var(--header-h)); padding: 3rem 0 5rem; }
+  .hero__logo { width: 330px; }
+  .access-grid { grid-template-columns: repeat(4, 1fr); }
+  .access-card { min-height: 380px; }
+  .welcome__grid { grid-template-columns: 5fr 7fr; gap: 4rem; align-items: start; }
+  .welcome__head { position: sticky; top: calc(var(--header-h) + 2rem); }
+  .path { grid-template-columns: repeat(5, 1fr); }
+  .pastor-hero { padding: 4rem 0 5rem; }
+  .pastor-hero__grid { grid-template-columns: 5fr 6fr; gap: 4.5rem; }
+  .bio-grid { grid-template-columns: 7fr 4fr; gap: 4rem; }
+  .facts { position: sticky; top: calc(var(--header-h) + 1.5rem); }
+  .gallery--mosaic { grid-template-columns: repeat(4, 1fr); }
+  .gallery--mosaic .gallery__item:first-child { grid-column: span 2; grid-row: span 2; }
+  .gallery--mosaic .gallery__item:first-child img { aspect-ratio: auto; height: 100%; }
+  .pillars { grid-template-columns: repeat(5, 1fr); }
+  .pillar { padding: 1.75rem 1.4rem; }
+  .categories { grid-template-columns: repeat(4, 1fr); }
+  .prayer-grid { grid-template-columns: 1fr 340px; align-items: start; }
+  .prayer-aside { position: sticky; top: calc(var(--header-h) + 1.5rem); }
+  .meet-bottom { grid-template-columns: 1fr 340px; }
+  .day-tabs { margin: 0; padding-inline: .1rem; overflow: visible; }
+}
+
+@media (min-width: 1180px) {
+  .mainnav { display: block; }
+  .menu-btn { display: none; }
+}
+
+/* Pantallas muy estrechas */
+@media (max-width: 360px) {
+  .brand__main { font-size: 1.15rem; }
+  .station__state { display: none; }
+}
+
+/* App instalada: respeta zonas seguras */
+@media (display-mode: standalone) {
+  .site-header { padding-top: env(safe-area-inset-top); height: calc(var(--header-h) + env(safe-area-inset-top)); }
+}
