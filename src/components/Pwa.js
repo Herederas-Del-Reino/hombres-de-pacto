@@ -24,11 +24,14 @@ export function initPwa() {
   window.addEventListener('load', async () => {
     try {
       const reg = await navigator.serviceWorker.register(asset('sw.js'), { scope: import.meta.env.BASE_URL, updateViaCache: 'none' });
+      // Solo se recarga cuando el usuario pidió actualizar (nunca en la primera visita,
+      // cuando el service worker toma el control y no hay nada que recargar).
+      let updateRequested = false;
       const offerUpdate = (worker) => {
         toast('Hay una nueva versión disponible.', {
           action: 'Actualizar',
           timeout: 0,
-          onAction: () => worker.postMessage('SKIP_WAITING'),
+          onAction: () => { updateRequested = true; worker.postMessage('SKIP_WAITING'); },
         });
       };
       if (reg.waiting && navigator.serviceWorker.controller) offerUpdate(reg.waiting);
@@ -40,7 +43,7 @@ export function initPwa() {
       });
       let reloading = false;
       navigator.serviceWorker.addEventListener('controllerchange', () => {
-        if (reloading) return;
+        if (reloading || !updateRequested) return;
         reloading = true;
         location.reload();
       });
