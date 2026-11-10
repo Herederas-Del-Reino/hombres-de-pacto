@@ -5,7 +5,7 @@
 
 Plataforma web y aplicación instalable (PWA) del ministerio Hombres de Pacto.
 
-🌐 **Sitio publicado:** <URL-del-sitio>
+🌐 **Sitio publicado:** https://herederas-del-reino.github.io/hombres-de-pacto/
 
 ## Secciones
 
@@ -63,9 +63,14 @@ npm run preview      # sirve dist/ en http://localhost:4173/hombres-de-pacto/
 npm run test:e2e     # con preview en marcha: pruebas de extremo a extremo (Playwright)
 ```
 
-`BASE_URL=<URL-del-sitio> npm run test:e2e` ejecuta las mismas pruebas sobre el sitio publicado.
+`BASE_URL=https://herederas-del-reino.github.io/hombres-de-pacto/ npm run test:e2e` ejecuta las mismas pruebas sobre el sitio publicado.
 
 ## Despliegue
+
+Repositorio oficial: `Herederas-Del-Reino/hombres-de-pacto` → https://herederas-del-reino.github.io/hombres-de-pacto/
+
+La ruta base se calcula sola en GitHub Actions a partir del nombre del repositorio (`BASE_PATH`): un repositorio `*.github.io` publica en la raíz `/`; cualquier otro, en `/<nombre-del-repositorio>/`. El manifest y el service worker usan rutas relativas, así que la PWA funciona en ambos casos.
+
 
 Cada `push` a `main` ejecuta `.github/workflows/deploy.yml` (pruebas → compilación → GitHub Pages).
 La base pública está fijada en `vite.config.js` (`/hombres-de-pacto/`).
