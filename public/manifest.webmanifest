@@ -3,9 +3,9 @@
   "short_name": "Hombres de Pacto",
   "description": "Hombres restaurados, comprometidos con Dios y sus familias.",
   "lang": "es",
-  "id": "/hombres-de-pacto/",
-  "start_url": "/hombres-de-pacto/#/inicio",
-  "scope": "/hombres-de-pacto/",
+  "id": "./",
+  "start_url": "./#/inicio",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#0B0D10",
@@ -17,8 +17,8 @@
     { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
   "shortcuts": [
-    { "name": "Vuelve al Altar", "url": "/hombres-de-pacto/#/altar", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
-    { "name": "Desafíos de Pacto", "url": "/hombres-de-pacto/#/desafios", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
-    { "name": "Nuestros Encuentros", "url": "/hombres-de-pacto/#/encuentros", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
+    { "name": "Vuelve al Altar", "url": "./#/altar", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Desafíos de Pacto", "url": "./#/desafios", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Nuestros Encuentros", "url": "./#/encuentros", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
   ]
 }

@@ -65,6 +65,8 @@ export function render(main) {
   main.innerHTML = `
     ${pageHead({
       image: 'adoracion',
+      scene: 'night',
+      index: 'III',
       eyebrow: 'Hombres de Pacto',
       title: 'Nuestros Encuentros',
       subtitle: 'Un mismo propósito: crecer en nuestra relación con Dios, fortalecer nuestra fe y caminar como hombres de pacto.',
@@ -80,7 +82,7 @@ export function render(main) {
       </div>
     </section>
 
-    <section class="section section--alt">
+    <section class="section section--stone">
       <div class="container meet-bottom">
         <div data-table>${tablaPaises()}</div>
         <figure class="poster reveal">

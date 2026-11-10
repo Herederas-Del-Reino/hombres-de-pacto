@@ -10,11 +10,14 @@ export function render(main) {
   main.innerHTML = `
     ${pageHead({
       image: 'equipo-evangelismo',
+      scene: 'dawn',
+      layout: 'split',
+      index: 'V',
       eyebrow: 'Nuestra comunidad',
       title: 'Una familia de hombres con propósito',
       intro: '<p>Hombres de Pacto es una comunidad de crecimiento espiritual donde buscamos fortalecer nuestra relación con Dios, desarrollar un carácter conforme a Cristo y vivir nuestra fe en el hogar y en la sociedad.</p>',
     })}
-    <section class="section" aria-labelledby="pilares">
+    <section class="section section--bronze pillars-section" aria-labelledby="pilares">
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow">Lo que nos sostiene</p>
@@ -31,7 +34,7 @@ export function render(main) {
       </div>
     </section>
 
-    <section class="section section--alt" aria-labelledby="galeria">
+    <section class="section section--stone" aria-labelledby="galeria">
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow">Galería ministerial</p>

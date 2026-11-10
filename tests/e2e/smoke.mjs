@@ -2,7 +2,7 @@
  * Prueba de extremo a extremo con Playwright sobre la compilación de producción.
  * Uso:
  *   npm run build && npm run preview   (en otra terminal)
- *   npm run test:e2e                    (o BASE_URL=https://usuario.github.io/hombres-de-pacto/ npm run test:e2e)
+ *   npm run test:e2e                    (o BASE_URL=https://hombres-de-pacto.github.io/ npm run test:e2e)
  * Opcional: SHOTS=carpeta para guardar capturas de cada sección.
  */
 import { chromium } from 'playwright';
@@ -36,7 +36,7 @@ async function go(page, hash) {
 
 try {
   /* 1. Las ocho secciones en móvil y escritorio: carga, título, sin desbordamiento horizontal */
-  for (const [label, viewport] of [['móvil', { width: 375, height: 812 }], ['escritorio', { width: 1440, height: 900 }]]) {
+  for (const [label, viewport] of [['móvil', { width: 375, height: 812 }], ['tableta', { width: 768, height: 1024 }], ['escritorio', { width: 1440, height: 900 }]]) {
     const { ctx, page, errors } = await newPage(viewport);
     for (const r of ROUTES) {
       await go(page, r);
@@ -181,7 +181,7 @@ try {
     assert.equal(manifest.name, 'Hombres de Pacto');
     for (const i of manifest.icons) assert.equal((await page.request.get(new URL(i.src, BASE).href)).status(), 200);
     const sw = await page.evaluate(async () => { const r = await navigator.serviceWorker.ready; return r.active?.scriptURL; });
-    assert.match(sw, /hombres-de-pacto\/sw\.js$/);
+    assert.ok(sw.startsWith(BASE) && sw.endsWith('/sw.js'), `service worker fuera de la base: ${sw}`);
     // Funciona sin conexión tras la primera visita
     await page.reload(); await page.waitForTimeout(500);
     await ctx.setOffline(true);

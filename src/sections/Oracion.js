@@ -12,6 +12,9 @@ export function render(main) {
   main.innerHTML = `
     ${pageHead({
       image: 'ministracion-oracion',
+      scene: 'ember',
+      layout: 'split',
+      index: 'VII',
       eyebrow: 'Oración y contacto',
       title: 'No camines solo',
       subtitle: 'Queremos acompañarte en oración.',
@@ -19,7 +22,7 @@ export function render(main) {
               <p>En Hombres de Pacto creemos en el poder de la oración y en el valor de caminar juntos en la fe.</p>
               <p class="page-head__motto">Comparte tu petición con nosotros.</p>`,
     })}
-    <section class="section section--tight">
+    <section class="section section--ivory prayer-section">
       <div class="container prayer-grid">
         <div class="form-frame reveal">
           <div class="form-frame__head">

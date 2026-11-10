@@ -17,7 +17,7 @@ function dayTabs(actual) {
     ${devocionales.map((d) => {
       const done = s.altar[d.dia]?.completado;
       return `<a role="tab" href="#/altar/${d.dia}" class="day-tab ${done ? 'is-done' : ''}" aria-selected="${d.dia === actual}" ${d.dia === actual ? 'aria-current="step"' : ''}>
-        <span class="day-tab__label">Día</span><span class="day-tab__num">${d.dia}</span>
+        <span class="day-tab__flame" aria-hidden="true">${icon('Flame', { size: 16 })}</span><span class="day-tab__label">Día</span><span class="day-tab__num">${d.dia}</span><span class="day-tab__tema">${esc(d.tema)}</span>
         ${done ? `<span class="day-tab__check">${icon('Check', { size: 14, stroke: 3 })}<span class="sr-only"> completado</span></span>` : ''}
       </a>`;
     }).join('')}
@@ -36,7 +36,7 @@ function dayView(d) {
     </header>
 
     <section class="altar-part" aria-labelledby="parte1">
-      <h3 id="parte1" class="altar-part__title"><span>Parte 1</span> Mi encuentro con Dios</h3>
+      <h3 id="parte1" class="altar-part__title"><span>Parte 1</span> Mi encuentro con Dios</h3><span class="altar-part__numeral" aria-hidden="true">I</span>
       <div class="altar-block">
         <h4 class="altar-block__label">${icon('BookOpen', { size: 18 })} Lecturas bíblicas</h4>
         <div class="bible-refs">${d.lecturas.map((r) => bibleLink(r)).join('')}</div>
@@ -53,7 +53,7 @@ function dayView(d) {
     </section>
 
     <section class="altar-part" aria-labelledby="parte2">
-      <h3 id="parte2" class="altar-part__title"><span>Parte 2</span> Mi respuesta a Dios</h3>
+      <h3 id="parte2" class="altar-part__title"><span>Parte 2</span> Mi respuesta a Dios</h3><span class="altar-part__numeral" aria-hidden="true">II</span>
       <div class="altar-block">
         <h4 class="altar-block__label">${icon('Footprints', { size: 18 })} Acción práctica <span class="tag">Apoyo editorial</span></h4>
         <p>${esc(d.accion)}</p>
@@ -109,12 +109,15 @@ export function render(main, params, ctx) {
   main.innerHTML = `
     ${pageHead({
       image: 'predicando-escenario-2',
+      scene: 'ember',
+      layout: 'split',
+      index: 'I',
       eyebrow: 'Hombres de Pacto',
       title: 'Vuelve al Altar',
       subtitle: 'Un encuentro diario con Dios',
       intro: `<p>Antes de ser padre, esposo o líder, eres hijo de Dios.</p><p>Aquí comienza un recorrido para fortalecer tus raíces espirituales y permitir que la Palabra transforme tu corazón.</p>`,
     })}
-    <section class="section section--tight">
+    <section class="altar-band">
       <div class="container container--reading">
         <div class="journey-status">
           <div class="journey-status__text">
@@ -125,6 +128,10 @@ export function render(main, params, ctx) {
         </div>
         ${dayTabs(d.dia)}
         ${completados === TOTAL ? finale() : ''}
+      </div>
+    </section>
+    <section class="section section--ivory altar-reading">
+      <div class="container container--reading">
         ${dayView(d)}
         <div class="data-actions">
           <button type="button" class="btn btn--text btn--sm" data-reset-altar>${icon('RotateCcw', { size: 16 })} Reiniciar mi recorrido del altar</button>

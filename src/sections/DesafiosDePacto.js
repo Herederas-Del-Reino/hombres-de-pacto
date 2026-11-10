@@ -7,6 +7,7 @@ import { pageHead, divider } from '../components/Visuals.js';
 import { progressBar, progressRing } from '../components/ProgressBar.js';
 import { confirmar, toast } from '../components/Modal.js';
 import { descargarReconocimiento } from '../utils/pdf.js';
+import { trail } from '../components/Trail.js';
 
 export const meta = { title: 'Desafíos de Pacto' };
 const TOTAL = desafios.length;
@@ -15,7 +16,11 @@ const estadoDe = (dia) => store.get().desafios[dia]?.estado ?? 'pendiente';
 
 function progressPanel() {
   const n = desafiosCumplidos();
+  const estados = desafios.map((d) => estadoDe(d.dia));
   return `<div class="path-progress" aria-labelledby="mi-camino-titulo">
+    <div class="path-progress__visual">${trail(estados, { className: 'path-progress__trail' })}
+      <span class="path-progress__summit">${n === TOTAL ? 'Cumbre alcanzada' : `Cumbre: día ${TOTAL}`}</span>
+    </div>
     ${progressRing(n, TOTAL, { size: 116, label: `${n} de ${TOTAL} desafíos completados` })}
     <div class="path-progress__text">
       <h2 id="mi-camino-titulo" class="path-progress__title">Mi camino de pacto</h2>
@@ -36,6 +41,8 @@ function pathView() {
   return `
     ${pageHead({
       image: 'evangelismo-calle',
+      scene: 'dawn',
+      index: 'II',
       eyebrow: 'Hombres de Pacto',
       title: 'Desafíos de Pacto',
       subtitle: '25 días para transformar tu vida',
@@ -98,6 +105,7 @@ function detailView(d) {
       ${progressBar(n, TOTAL, { label: 'Desafíos completados', className: 'progress--thin' })}
 
       <article class="challenge challenge--${est}" aria-labelledby="page-title">
+        <span class="challenge__watermark" aria-hidden="true">${String(d.dia).padStart(2, '0')}</span>
         <div class="challenge__top">
           <span class="challenge__icon">${icon(d.icono, { size: 34 })}</span>
           <div>

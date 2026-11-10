@@ -4,6 +4,7 @@ import './styles/components.css';
 import './styles/sections.css';
 import './styles/responsive.css';
 import './styles/brand.css';
+import './styles/theme.css';
 
 import { renderHeader, renderTabbar, setActive, ROUTES } from './components/Navigation.js';
 import { renderFooter } from './components/Footer.js';

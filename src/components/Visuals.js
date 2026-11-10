@@ -1,5 +1,6 @@
 /** Elementos visuales de marca: montañas, divisores, banderas y encabezados de sección. */
 import { esc, asset } from '../utils/dom.js';
+import { landscape } from './Landscape.js';
 
 /** Marco dorado doble con esquinas y destellos diagonales (decorativo). */
 export const ornaments = ({ streaks = true } = {}) => `<div class="gold-frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>${streaks ? '<div class="streaks" aria-hidden="true"><i></i><i></i><i></i></div>' : ''}`;
@@ -43,17 +44,29 @@ export function mountains({ className = '', glow = true } = {}) {
 export const divider = (className = '') => `<div class="divider ${className}" aria-hidden="true"><span></span><svg viewBox="0 0 40 20"><path d="M2 18 L14 6 L20 12 L26 4 L38 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span></span></div>`;
 
 /** Encabezado editorial común a todas las secciones. */
-export function pageHead({ eyebrow = '', title, subtitle = '', intro = '', id = 'page-title', image = '' }) {
-  return `<header class="page-head ${image ? 'page-head--image' : ''}">
-    ${image ? `<div class="page-head__img" style="background-image:url('${asset(`images/${image}.webp`)}')" aria-hidden="true"></div>` : ''}
-    ${mountains({ className: 'page-head__mountains', glow: !image })}
+/**
+ * Encabezado de sección con personalidad propia.
+ *  scene:  paisaje ilustrado ('dawn' | 'ember' | 'night')
+ *  layout: 'center' (foto atenuada detrás) o 'split' (texto + fotografía enmarcada)
+ *  index:  numeral editorial decorativo (I, II, III…)
+ */
+export function pageHead({ eyebrow = '', title, subtitle = '', intro = '', id = 'page-title', image = '', scene = 'dawn', layout = 'center', index = '' }) {
+  const photo = image ? asset(`images/${image}.webp`) : '';
+  return `<header class="ph ph--${layout} ph--${scene}">
+    ${landscape(scene, { className: 'ph__scene' })}
+    ${photo && layout === 'center' ? `<div class="ph__photo" style="background-image:url('${photo}')" aria-hidden="true"></div>` : ''}
+    <div class="ph__veil" aria-hidden="true"></div>
     ${ornaments()}
-    <div class="container page-head__inner reveal">
-      ${eyebrow ? `<p class="eyebrow">${esc(eyebrow)}</p>` : ''}
-      <h1 id="${id}" class="page-head__title" tabindex="-1">${title}</h1>
-      ${subtitle ? `<p class="page-head__subtitle">${subtitle}</p>` : ''}
-      ${divider()}
-      ${intro ? `<div class="page-head__intro">${intro}</div>` : ''}
+    <div class="container ph__inner">
+      <div class="ph__text reveal">
+        ${index ? `<span class="ph__index" aria-hidden="true">${index}</span>` : ''}
+        ${eyebrow ? `<p class="ph__eyebrow">${esc(eyebrow)}</p>` : ''}
+        <h1 id="${id}" class="page-head__title" tabindex="-1">${title}</h1>
+        ${subtitle ? `<p class="page-head__subtitle">${subtitle}</p>` : ''}
+        ${goldRule(layout === 'split' ? 'gold-rule--left' : '')}
+        ${intro ? `<div class="page-head__intro">${intro}</div>` : ''}
+      </div>
+      ${photo && layout === 'split' ? `<figure class="ph__figure reveal" style="--d:120ms"><img src="${photo}" alt="" loading="eager" decoding="async" /></figure>` : ''}
     </div>
   </header>`;
 }

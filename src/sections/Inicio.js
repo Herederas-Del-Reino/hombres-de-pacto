@@ -1,92 +1,136 @@
-import { asset, picture } from '../utils/dom.js';
+import { asset, picture, esc } from '../utils/dom.js';
 import { icon } from '../components/Icons.js';
-import { mountains, divider, ornaments, goldRule } from '../components/Visuals.js';
+import { ornaments, goldRule } from '../components/Visuals.js';
+import { landscape } from '../components/Landscape.js';
+import { trail } from '../components/Trail.js';
 import { nextMeetingCard, countrySelector, bindCountrySelector, startCountdowns } from '../components/Schedule.js';
 import { store, desafiosCumplidos, altarCompletados } from '../utils/storage.js';
-import { progressBar } from '../components/ProgressBar.js';
+import { desafios } from '../data/desafios.js';
+import { devocionales } from '../data/devocionales.js';
+import { pastor } from '../data/pastor.js';
 
 export const meta = { title: 'Inicio' };
-
-const accesos = [
-  { href: '#/altar', titulo: 'Vuelve al Altar', texto: 'Un encuentro diario con Dios en siete días.', img: 'predicando-escenario-2', icono: 'Flame' },
-  { href: '#/desafios', titulo: 'Desafíos de Pacto', texto: '25 días. 25 decisiones. Un compromiso de transformación.', img: 'evangelismo-calle', icono: 'Mountain' },
-  { href: '#/encuentros', titulo: 'Nuestros Encuentros', texto: 'Devocional de madrugada y Salmos, en tu hora local.', img: 'adoracion', icono: 'Calendar' },
-  { href: '#/pastor', titulo: 'Conoce al Pastor', texto: 'Oscar Amarales: una vida de fe, familia y servicio.', img: 'pastor-retrato', icono: 'BookOpen' },
-];
 
 function progresoPersonal() {
   const s = store.get();
   const d = desafiosCumplidos(s);
   const a = altarCompletados(s);
   if (!d && !a) return '';
-  return `<section class="section section--tight" aria-labelledby="mi-camino">
-    <div class="container">
-      <div class="my-progress reveal">
-        <h2 id="mi-camino" class="h3">Tu camino continúa</h2>
-        <div class="my-progress__grid">
-          <a class="my-progress__item" href="#/altar">
-            <span>${icon('Flame', { size: 20 })} Vuelve al Altar</span>
-            <strong>${a} de 7 encuentros</strong>
-            ${progressBar(a, 7, { label: 'Encuentros completados' })}
-          </a>
-          <a class="my-progress__item" href="#/desafios">
-            <span>${icon('Mountain', { size: 20 })} Desafíos de Pacto</span>
-            <strong>${d} de 25 desafíos</strong>
-            ${progressBar(d, 25, { label: 'Desafíos completados' })}
-          </a>
-        </div>
-      </div>
+  return `<section class="resume" aria-labelledby="mi-camino">
+    <div class="container resume__inner">
+      <h2 id="mi-camino" class="resume__title">Tu camino continúa</h2>
+      <a class="resume__item" href="#/altar"><span class="resume__num">${a}<small>/7</small></span><span>Encuentros en<br/>Vuelve al Altar</span></a>
+      <a class="resume__item" href="#/desafios"><span class="resume__num">${d}<small>/25</small></span><span>Desafíos de<br/>Pacto cumplidos</span></a>
     </div>
   </section>`;
 }
 
 export function render(main) {
+  const s = store.get();
+  const estados = desafios.map((d) => s.desafios[d.dia]?.estado ?? 'pendiente');
+  const hecho = desafiosCumplidos(s);
+  const sigAltar = devocionales.find((d) => !s.altar[d.dia]?.completado) ?? devocionales[0];
+
   main.innerHTML = `
-  <section class="hero" aria-labelledby="page-title">
-    <div class="hero__sky" aria-hidden="true"></div>
-    <div class="hero__photo" aria-hidden="true" style="background-image:url('${asset('images/adoracion.webp')}')"></div>
-    ${mountains({ className: 'hero__mountains' })}
+  <section class="hero3" aria-labelledby="page-title">
+    ${landscape('dawn', { className: 'hero3__scene' })}
+    <div class="hero3__veil" aria-hidden="true"></div>
     ${ornaments()}
-    <div class="hero__inner container">
-      <img class="hero__logo" src="${asset('images/logo.webp')}" alt="Logo oficial de Hombres de Pacto: yelmo, espada, montañas, escudo y Biblia abierta" width="670" height="705" fetchpriority="high" />
-      <h1 id="page-title" class="hero__title" tabindex="-1"><span>Hombres de</span> Pacto</h1>
-      ${goldRule('gold-rule--hero')}
-      <p class="hero__lema">Hombres restaurados, comprometidos con Dios y sus familias.</p>
-      <p class="hero__frase">No solamente lo declaramos. <em>Lo vivimos.</em></p>
-      <div class="hero__ctas">
-        <a class="btn btn--primary btn--lg" href="#/altar">${icon('Flame', { size: 20 })} Comienza tu encuentro con Dios</a>
-        <a class="btn btn--outline btn--lg" href="#/desafios">${icon('Mountain', { size: 20 })} Inicia tus 25 desafíos</a>
-        <a class="btn btn--text btn--lg" href="#/comunidad">Conoce nuestra comunidad ${icon('ArrowRight', { size: 18 })}</a>
+    <div class="container hero3__grid">
+      <div class="hero3__mark">
+        <img class="hero3__logo" src="${asset('images/logo.webp')}" alt="Logo oficial de Hombres de Pacto: yelmo, espada, montañas, escudo y Biblia abierta" width="670" height="705" fetchpriority="high" />
       </div>
-      <blockquote class="hero__verse">
-        <p>«Pero yo y mi casa serviremos a Jehová».</p>
-        <cite>Josué 24:15</cite>
-      </blockquote>
+      <div class="hero3__copy">
+        <p class="hero3__kicker"><span></span>Comunidad de hombres de fe</p>
+        <h1 id="page-title" class="hero3__title" tabindex="-1"><span class="hero3__pre">Hombres de</span> Pacto</h1>
+        <p class="hero3__lema">Hombres restaurados, comprometidos con Dios y sus familias.</p>
+        <p class="hero3__frase">No solamente lo declaramos. <em>Lo vivimos.</em></p>
+        <div class="hero3__ctas">
+          <a class="btn btn--primary btn--lg" href="#/altar">${icon('Flame', { size: 20 })} Comienza tu encuentro con Dios</a>
+          <a class="btn btn--outline btn--lg" href="#/desafios">${icon('Mountain', { size: 20 })} Inicia tus 25 desafíos</a>
+          <a class="link-arrow" href="#/comunidad">Conoce nuestra comunidad ${icon('ArrowRight', { size: 18 })}</a>
+        </div>
+      </div>
     </div>
+    <blockquote class="hero3__verse">
+      <p>«Pero yo y mi casa serviremos a Jehová».</p>
+      <cite>Josué 24:15</cite>
+    </blockquote>
+    <a class="hero3__scroll" href="#bienvenida" aria-label="Ir a la bienvenida">${icon('ChevronRight', { size: 22 })}</a>
   </section>
 
   ${progresoPersonal()}
 
-  <section class="section welcome" aria-labelledby="bienvenida">
-    <div class="container welcome__grid">
-      <div class="welcome__head reveal">
-        <p class="eyebrow">Bienvenida oficial</p>
-        <h2 id="bienvenida" class="h2">Bienvenido a Hombres de Pacto</h2>
-        ${divider('divider--left')}
-        <p class="lead">No estás aquí por casualidad. Estás aquí porque creemos que Dios sigue levantando hombres dispuestos a ser transformados desde adentro.</p>
-        <figure class="framed-photo">
-          ${picture('adoracion', 'Hombres y mujeres en adoración durante un servicio', { sizes: '(max-width: 900px) 90vw, 35vw' })}
-          <figcaption>Adoración en comunidad</figcaption>
-        </figure>
+  <section class="section section--ivory welcome3" aria-labelledby="bienvenida">
+    <div class="container welcome3__grid">
+      <div class="welcome3__text">
+        <p class="kicker reveal">Bienvenida oficial</p>
+        <h2 id="bienvenida" class="display reveal">Bienvenido a <span>Hombres de Pacto</span></h2>
+        <p class="lead dropcap reveal">No estás aquí por casualidad. Estás aquí porque creemos que Dios sigue levantando hombres dispuestos a ser transformados desde adentro.</p>
+        <div class="columns reveal">
+          <p>Hombres que entienden que la verdadera fortaleza no está en imponer su autoridad, sino en aprender a amar, servir, proteger, cuidar y permanecer fieles a Dios.</p>
+          <p>Esta comunidad nace con una convicción: necesitamos hombres que vuelvan al altar, que restauren su relación con Dios, que asuman su responsabilidad en el hogar y que comprendan el valor de su llamado.</p>
+        </div>
+        <blockquote class="quote-xl reveal"><p>Aquí no buscamos hombres perfectos, buscamos hombres dispuestos a rendir su corazón a Dios y permitir que Él transforme su carácter.</p></blockquote>
+        <div class="columns reveal">
+          <p>Queremos verte crecer como hijo de Dios, como esposo, como padre, como hermano y como hombre de propósito.</p>
+          <p>Nuestro compromiso es vivir lo que creemos, amar como Cristo nos enseñó y dejar una herencia de fe a las próximas generaciones.</p>
+        </div>
+        <p class="welcome3__family reveal">Bienvenido a esta familia.</p>
+        <p class="welcome3__sign reveal"><strong>Somos Hombres de Pacto.</strong> No solamente lo declaramos, lo vivimos.</p>
       </div>
-      <div class="welcome__body reading">
-        <p class="reveal">Hombres que entienden que la verdadera fortaleza no está en imponer su autoridad, sino en aprender a amar, servir, proteger, cuidar y permanecer fieles a Dios.</p>
-        <p class="reveal">Esta comunidad nace con una convicción: necesitamos hombres que vuelvan al altar, que restauren su relación con Dios, que asuman su responsabilidad en el hogar y que comprendan el valor de su llamado.</p>
-        <p class="pullquote reveal">Aquí no buscamos hombres perfectos, buscamos hombres dispuestos a rendir su corazón a Dios y permitir que Él transforme su carácter.</p>
-        <p class="reveal">Queremos verte crecer como hijo de Dios, como esposo, como padre, como hermano y como hombre de propósito.</p>
-        <p class="reveal">Nuestro compromiso es vivir lo que creemos, amar como Cristo nos enseñó y dejar una herencia de fe a las próximas generaciones.</p>
-        <p class="welcome__family reveal">Bienvenido a esta familia.</p>
-        <p class="welcome__sign reveal"><strong>Somos Hombres de Pacto.</strong> No solamente lo declaramos, lo vivimos.</p>
+      <div class="collage reveal" aria-label="Fotografías del ministerio">
+        <figure class="collage__a">${picture('adoracion', 'Hombres y mujeres en adoración durante un servicio', { sizes: '(max-width: 900px) 80vw, 30vw' })}</figure>
+        <figure class="collage__b">${picture('oracion-equipo', 'El equipo ora por dos jóvenes sentados frente a un local', { sizes: '(max-width: 900px) 60vw, 22vw' })}</figure>
+        <p class="collage__caption">Fe que se vive en comunidad</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section paths" aria-labelledby="caminos">
+    <div class="container">
+      <div class="paths__head">
+        <p class="kicker reveal">Tu camino comienza aquí</p>
+        <h2 id="caminos" class="display display--light reveal">Cuatro puertas para<br/><span>caminar con Dios</span></h2>
+      </div>
+      <div class="bento">
+        <a class="tile tile--altar reveal" href="#/altar">
+          ${picture('predicando-escenario-2', '', { className: 'tile__img', sizes: '(max-width: 760px) 100vw, 40vw' })}
+          <span class="tile__shade" aria-hidden="true"></span>
+          <span class="tile__body">
+            <span class="tile__tag">${icon('Flame', { size: 16 })} 7 encuentros</span>
+            <span class="tile__title">Vuelve al Altar</span>
+            <span class="tile__text">Un encuentro diario con Dios. Hoy te espera: <em>${esc(sigAltar.tema)}</em>.</span>
+            <span class="tile__go">Entrar ${icon('ArrowRight', { size: 16 })}</span>
+          </span>
+        </a>
+        <a class="tile tile--desafios reveal" href="#/desafios" style="--d:80ms">
+          <span class="tile__body">
+            <span class="tile__tag">${icon('Mountain', { size: 16 })} 25 días · 25 decisiones</span>
+            <span class="tile__title">Desafíos de Pacto</span>
+            <span class="tile__text">${hecho ? `Llevas <strong>${hecho} de 25</strong>. Sigue subiendo.` : 'Un camino de transformación, paso a paso.'}</span>
+            <span class="tile__go">Ver mi camino ${icon('ArrowRight', { size: 16 })}</span>
+          </span>
+          ${trail(estados, { className: 'tile__trail' })}
+        </a>
+        <a class="tile tile--encuentros reveal" href="#/encuentros" style="--d:160ms">
+          ${landscape('night', { className: 'tile__scene', rays: false })}
+          <span class="tile__body">
+            <span class="tile__tag">${icon('Calendar', { size: 16 })} Cada semana</span>
+            <span class="tile__title">Nuestros Encuentros</span>
+            <span class="tile__times"><b>5:00</b> a. m. <i>Martes</i> <b>8:00</b> p. m. <i>Lunes a viernes</i></span>
+            <span class="tile__text">Hora de España · se adapta a tu país.</span>
+          </span>
+        </a>
+        <a class="tile tile--pastor reveal" href="#/pastor" style="--d:240ms">
+          ${picture('pastor-retrato', '', { className: 'tile__img', sizes: '(max-width: 760px) 100vw, 25vw' })}
+          <span class="tile__shade" aria-hidden="true"></span>
+          <span class="tile__body">
+            <span class="tile__tag">${icon('BookOpen', { size: 16 })} Conoce al pastor</span>
+            <span class="tile__title">Oscar Amarales</span>
+            <span class="tile__text">Una vida de fe, familia y servicio a Dios.</span>
+          </span>
+        </a>
       </div>
     </div>
   </section>
@@ -100,50 +144,45 @@ export function render(main) {
     </div>
   </section>
 
-  <section class="section section--alt" aria-labelledby="accesos">
-    <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow">Tu camino comienza aquí</p>
-        <h2 id="accesos" class="h2">Accesos principales</h2>
-      </div>
-      <div class="access-grid">
-        ${accesos.map((a) => `
-          <a class="access-card reveal" href="${a.href}">
-            ${picture(a.img, '', { className: 'access-card__img', sizes: '(max-width: 700px) 100vw, 25vw' })}
-            <span class="access-card__shade" aria-hidden="true"></span>
-            <span class="access-card__content">
-              <span class="access-card__icon">${icon(a.icono, { size: 22 })}</span>
-              <span class="access-card__title">${a.titulo}</span>
-              <span class="access-card__text">${a.texto}</span>
-              <span class="access-card__go">Entrar ${icon('ArrowRight', { size: 16 })}</span>
-            </span>
-          </a>`).join('')}
-      </div>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="proximo">
-    <div class="container next-wrap">
-      <div class="reveal">
-        <p class="eyebrow">Nuestros encuentros</p>
-        <h2 id="proximo" class="h2">Te esperamos en el próximo encuentro</h2>
-        <p class="muted">Calculado automáticamente según tu país, incluido el horario de verano de España.</p>
+  <section class="section section--bronze" aria-labelledby="proximo">
+    <div class="container next3">
+      <div class="next3__intro reveal">
+        <p class="kicker kicker--light">Nuestros encuentros</p>
+        <h2 id="proximo" class="display display--light">Te esperamos en el <span>próximo encuentro</span></h2>
+        <p>Calculado automáticamente según tu país, incluido el horario de verano de España.</p>
         <div data-country>${countrySelector({ id: 'pais-inicio' })}</div>
       </div>
-      <div class="reveal" data-next>${nextMeetingCard({ compact: true })}</div>
+      <div class="reveal" data-next style="--d:100ms">${nextMeetingCard({ compact: true })}</div>
     </div>
   </section>
 
-  <section class="section section--cta" aria-labelledby="cta-oracion">
-    <div class="container cta-band reveal">
-      <div>
-        <h2 id="cta-oracion" class="h3">No camines solo</h2>
-        <p>Queremos acompañarte en oración. Comparte tu petición con nosotros.</p>
+  <section class="section section--stone pastor-teaser" aria-labelledby="pastor-teaser">
+    <div class="container pastor-teaser__grid">
+      <figure class="pastor-teaser__photo reveal">${picture('pastor-retrato', pastor.retrato.alt, { sizes: '(max-width: 760px) 80vw, 30vw' })}</figure>
+      <div class="pastor-teaser__text reveal" style="--d:100ms">
+        <p class="kicker">Nuestro pastor</p>
+        <h2 id="pastor-teaser" class="display">Oscar <span>Amarales</span></h2>
+        <p class="lead">${esc(pastor.biografia[3])}</p>
+        <p>${esc(pastor.biografia[5])}</p>
+        <a class="btn btn--dark" href="#/pastor">Conoce su historia ${icon('ArrowRight', { size: 18 })}</a>
       </div>
-      <a class="btn btn--primary" href="#/oracion">${icon('HandHeart', { size: 20 })} Enviar mi petición</a>
+    </div>
+  </section>
+
+  <section class="prayer-cta" aria-labelledby="cta-oracion">
+    ${landscape('ember', { className: 'prayer-cta__scene', rays: false })}
+    <div class="container prayer-cta__inner reveal">
+      <p class="kicker kicker--light">Oración</p>
+      <h2 id="cta-oracion" class="display display--light">No camines <span>solo</span></h2>
+      <p>Queremos acompañarte en oración. Comparte tu petición con nosotros.</p>
+      <a class="btn btn--primary btn--lg" href="#/oracion">${icon('HandHeart', { size: 20 })} Enviar mi petición</a>
     </div>
   </section>`;
 
+  main.querySelector('.hero3__scroll').addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('bienvenida')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
   const refresh = () => { main.querySelector('[data-next]').innerHTML = nextMeetingCard({ compact: true }); };
   bindCountrySelector(main, refresh);
   return startCountdowns(main, refresh);

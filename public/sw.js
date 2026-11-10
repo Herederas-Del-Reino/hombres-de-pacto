@@ -6,7 +6,7 @@
  */
 const VERSION = '__BUILD_VERSION__';
 const CACHE = `hdp-${VERSION}`;
-const SCOPE = self.registration.scope; // termina en /hombres-de-pacto/
+const SCOPE = self.registration.scope; // raíz del sitio (p. ej. https://hombres-de-pacto.github.io/)
 const PRECACHE = ['', 'index.html', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png', 'images/logo.webp', 'images/logo-sm.webp'].map((p) => new URL(p, SCOPE).href);
 
 self.addEventListener('install', (event) => {
