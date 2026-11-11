@@ -334,3 +334,42 @@
 }
 
 .quote-xl { clear: both; }
+
+
+/* ---------- Encuentros: tabla por país y afiches oficiales ---------- */
+.flag-group { display: inline-flex; gap: 3px; vertical-align: middle; }
+.flag-group .flag { width: 18px; height: 12px; }
+.times-table--paises { min-width: 560px; }
+.times-table--paises tbody th { display: flex; align-items: center; gap: .5rem; font-family: var(--f-ui); font-weight: 600; font-size: .9rem; white-space: nowrap; }
+.times-table--paises thead th { text-align: center; }
+.times-table--paises thead th:first-child { text-align: left; }
+.times-table--paises td { text-align: center; }
+.times-table--paises tr.is-mine { background: rgba(212, 175, 55, .18); }
+.times-table--paises tr.is-mine th span::after { content: 'Tu país'; margin-left: .5rem; font-size: .62rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: .15rem .5rem; border-radius: 999px; background: var(--bronze-ink); color: #fff; }
+.posters { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; align-content: start; }
+.poster { all: unset; box-sizing: border-box; cursor: zoom-in; display: grid; gap: .5rem; position: relative; }
+.poster img { width: 100%; height: auto; border-radius: 10px; box-shadow: 0 24px 40px -24px rgba(31, 26, 20, .7); transition: transform .4s var(--ease); }
+.poster:hover img { transform: translateY(-4px); }
+.poster:focus-visible { outline: 3px solid var(--bronze-ink); outline-offset: 4px; border-radius: 10px; }
+.poster__cap { font-size: .78rem; font-weight: 600; text-align: center; color: var(--ink-3); }
+.meet-bottom { grid-template-columns: 1fr; }
+@media (min-width: 960px) { .meet-bottom { grid-template-columns: 1.2fr 1fr; } }
+@media (max-width: 559px) { .posters { grid-template-columns: 1fr 1fr; gap: .6rem; } }
+@media (min-width: 760px) { .meet-top { grid-template-columns: minmax(0, 1fr); align-items: start; } }
+.meet-top .country__opts { flex-wrap: wrap; }
+
+/* Tabla por país: ancho completo en escritorio, tarjetas en móvil */
+.meet-bottom { grid-template-columns: minmax(0, 1fr) !important; }
+.meet-bottom .posters { max-width: 760px; margin-inline: auto; width: 100%; }
+.times-table--paises { min-width: 0; }
+.times-table--paises td strong { font-size: 1.1rem; }
+@media (max-width: 759px) {
+  .times-table--paises, .times-table--paises tbody, .times-table--paises tr, .times-table--paises td, .times-table--paises th { display: block; }
+  .times-table--paises thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .times-table--paises tr { padding: .8rem 1rem; border-top: 1px solid rgba(31, 26, 20, .1); }
+  .times-table--paises tbody th { border: 0; padding: 0 0 .4rem; }
+  .times-table--paises td { display: flex; align-items: baseline; justify-content: space-between; gap: .6rem; border: 0; padding: .25rem 0; text-align: right; }
+  .times-table--paises td::before { content: attr(data-label); font-size: .8rem; font-weight: 600; color: var(--ink-3); text-align: left; }
+  .times-table--paises td .times-table__days { display: inline; margin-left: auto; }
+  .times-table--paises td strong { display: inline; font-size: 1rem; }
+}

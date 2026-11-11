@@ -32,10 +32,12 @@ test('hay 7 devocionales completos con dos partes', () => {
 });
 
 test('encuentros y países usan zonas IANA válidas y no inventan enlaces', () => {
-  assert.equal(encuentros.length, 2);
+  assert.equal(encuentros.length, 3);
+  assert.deepEqual(encuentros.map((e) => e.id), ['devocional', 'valientes', 'salmos']);
   encuentros.forEach((e) => assert.equal(e.enlace, null));
   paises.forEach((p) => assert.doesNotThrow(() => new Intl.DateTimeFormat('es', { timeZone: p.zona })));
-  assert.deepEqual(paises.map((p) => p.zona), ['Europe/Madrid', 'America/Bogota', 'America/Argentina/Buenos_Aires']);
+  assert.deepEqual(paises.slice(0, 3).map((p) => p.zona), ['Europe/Madrid', 'America/Bogota', 'America/Argentina/Buenos_Aires']);
+  assert.equal(paises.length, 8);
 });
 
 test('la biblioteca tiene las 8 categorías y 6 tipos', () => {

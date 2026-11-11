@@ -72,4 +72,21 @@ test('próximo encuentro: viernes 22:00 → Salmos del lunes (fin de semana sin 
   assert.equal(formatear(n.fecha, ES).dia, 'lunes');
 });
 
+test('Entre Valientes (martes 8:00 p. m. España) coincide con el afiche de invierno', () => {
+  const valientes = encuentros.find((e) => e.id === 'valientes');
+  const casos = [
+    ['Europe/Berlin', 'Martes', '8:00 p. m.'],
+    ['Europe/London', 'Martes', '7:00 p. m.'],
+    [CO, 'Martes', '2:00 p. m.'],
+    ['America/Lima', 'Martes', '2:00 p. m.'],
+    ['America/Mexico_City', 'Martes', '1:00 p. m.'],
+    [AR, 'Martes', '4:00 p. m.'],
+    ['America/Santiago', 'Martes', '4:00 p. m.'],
+  ];
+  for (const [zona, dia, hora] of casos) assert.deepEqual(pick(horarioSemanal(valientes, zona, INVIERNO)), [dia, hora], zona);
+  // Devocional en Reino Unido y México, como en el afiche
+  assert.deepEqual(pick(horarioSemanal(devocional, 'Europe/London', INVIERNO)), ['Martes', '4:00 a. m.']);
+  assert.deepEqual(pick(horarioSemanal(devocional, 'America/Mexico_City', INVIERNO)), ['Lunes', '10:00 p. m.']);
+});
+
 function pick(h) { return [h.diasTexto, h.hora]; }

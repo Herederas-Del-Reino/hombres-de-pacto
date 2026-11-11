@@ -21,7 +21,7 @@ const jobs = [
   ['m-desafios', M, '#/desafios'], ['d-desafios', D, '#/desafios'], ['m-dia8', M, '#/desafios/8'], ['d-dia3', D, '#/desafios/3'],
   ['m-inicio', M, '#/inicio'], ['d-inicio', D, '#/inicio'], ['d-pastor', D, '#/pastor'], ['m-pastor', M, '#/pastor'],
   ['d-altar', D, '#/altar'], ['d-oracion', D, '#/oracion'], ['m-oracion', M, '#/oracion'], ['d-recursos', D, '#/recursos'],
-  ['d-encuentros', D, '#/encuentros'], ['t-comunidad', T, '#/comunidad'], ['t-desafios', T, '#/desafios'],
+  ['d-encuentros', D, '#/encuentros'], ['m-encuentros', M, '#/encuentros'], ['t-comunidad', T, '#/comunidad'], ['t-desafios', T, '#/desafios'],
 ];
 for (const [n, vp, h] of jobs) if (which.includes('all') || which.includes(n)) await shot(vp, h, n);
 await b.close();

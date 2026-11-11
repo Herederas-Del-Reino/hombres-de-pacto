@@ -6,7 +6,7 @@ import {
   Download, Check, X, ChevronLeft, ChevronRight, Menu, House, CircleCheck, Circle, CircleDot, PenLine,
   Video, FileText, Lightbulb, Library, Compass, Smartphone, Share, SquarePlus, RotateCcw, Lock, MapPin,
   Calendar, Crown, Timer, HeartHandshake, ArrowRight, ExternalLink, BookMarked, Cross, Upload, Info,
-  Ellipsis, Flame, EllipsisVertical,
+  Ellipsis, Flame, EllipsisVertical, Sword,
 } from 'lucide';
 
 const ICONS = {
@@ -16,7 +16,7 @@ const ICONS = {
   Download, Check, X, ChevronLeft, ChevronRight, Menu, House, CircleCheck, Circle, CircleDot, PenLine,
   Video, FileText, Lightbulb, Library, Compass, Smartphone, Share, SquarePlus, RotateCcw, Lock, MapPin,
   Calendar, Crown, Timer, HeartHandshake, ArrowRight, ExternalLink, BookMarked, Cross, Upload, Info,
-  Ellipsis, Flame, EllipsisVertical,
+  Ellipsis, Flame, EllipsisVertical, Sword,
 };
 
 const attrs = (o) => Object.entries(o).map(([k, v]) => `${k}="${v}"`).join(' ');

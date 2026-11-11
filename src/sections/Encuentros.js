@@ -3,11 +3,17 @@ import { horarioSemanal, proximasOcurrencias, formatear, esVeranoEspana, ZONA_BA
 import { esc, asset } from '../utils/dom.js';
 import { icon } from '../components/Icons.js';
 import { pageHead, flags } from '../components/Visuals.js';
+import { bindLightbox } from '../components/Lightbox.js';
 import {
   countrySelector, bindCountrySelector, paisActual, nextMeetingCard, startCountdowns, opcionesPais, horaBase,
 } from '../components/Schedule.js';
 
 export const meta = { title: 'Nuestros Encuentros' };
+
+const AFICHES = [
+  { img: 'afiche-horarios', h: 770, pie: 'Afiche oficial · Hora España', alt: 'Afiche Nuestros Encuentros en hora de España: Devocional de Madrugada martes 5:00 a. m., Entre Valientes martes 8:00 p. m. y Salmos de lunes a viernes 8:00 p. m.' },
+  { img: 'afiche-horarios-internacional', h: 770, pie: 'Horario en tu país', alt: 'Afiche Nuestros Encuentros con horarios por país: Alemania, Francia e Italia, Reino Unido, Colombia y Perú, México y Argentina y Chile' },
+];
 
 function meetingCards() {
   const pais = paisActual();
@@ -46,14 +52,15 @@ function meetingCards() {
 function tablaPaises() {
   const now = new Date();
   const opts = opcionesPais();
-  return `<h2 class="h3 table-title" id="tabla-horarios">Horarios de esta semana en cada país</h2>
+  const actual = paisActual();
+  return `<h2 class="h3 table-title" id="tabla-horarios">Horario en tu país</h2>
   <div class="table-wrap reveal" role="region" aria-labelledby="tabla-horarios" tabindex="0">
-    <table class="times-table">
-      <thead><tr><th scope="col">Encuentro</th>${opts.map((o) => `<th scope="col">${flags[o.id] ?? flags.LOCAL} ${esc(o.nombre)}</th>`).join('')}</tr></thead>
+    <table class="times-table times-table--paises">
+      <thead><tr><th scope="col">País</th>${encuentros.map((e) => `<th scope="col">${esc(e.nombre)}</th>`).join('')}</tr></thead>
       <tbody>
-        ${encuentros.map((e) => `<tr><th scope="row">${esc(e.nombre)}</th>${opts.map((o) => {
+        ${opts.map((o) => `<tr${o.id === actual.id ? ' class="is-mine"' : ''}><th scope="row">${flags[o.id] ?? flags.LOCAL} <span>${esc(o.nombre)}</span></th>${encuentros.map((e) => {
           const h = horarioSemanal(e, o.zona, now);
-          return `<td><span class="times-table__days">${h.diasTexto}</span><strong>${h.hora}</strong></td>`;
+          return `<td data-label="${esc(e.nombre)}"><span class="times-table__days">${h.diasTexto}</span><strong>${h.hora}</strong></td>`;
         }).join('')}</tr>`).join('')}
       </tbody>
     </table>
@@ -85,18 +92,22 @@ export function render(main) {
     <section class="section section--stone">
       <div class="container meet-bottom">
         <div data-table>${tablaPaises()}</div>
-        <figure class="poster reveal">
-          <img src="${asset('images/afiche-encuentros.webp')}" alt="Afiche oficial de Nuestros Encuentros: Devocional de Madrugada los martes a las 5:00 a. m. y Salmos de lunes a viernes a las 8:00 p. m., hora de España" width="370" height="373" loading="lazy" />
-          <figcaption>Afiche oficial de los encuentros</figcaption>
-        </figure>
+        <div class="posters" data-afiches>
+          ${AFICHES.map((a, i) => `<button type="button" class="poster reveal" data-lightbox="${i}" style="--d:${i * 100}ms" aria-label="Ampliar ${esc(a.pie)}">
+            <img src="${asset(`images/${a.img}-sm.webp`)}" alt="${esc(a.alt)}" width="640" height="${a.h}" loading="lazy" decoding="async" />
+            <span class="poster__cap">${esc(a.pie)}</span>
+          </button>`).join('')}
+        </div>
       </div>
     </section>`;
 
   const refresh = () => {
     main.querySelector('[data-next]').innerHTML = nextMeetingCard();
     main.querySelector('[data-meetings]').innerHTML = meetingCards();
-    main.querySelectorAll('[data-meetings] .reveal').forEach((n) => n.classList.add('is-in'));
+    main.querySelector('[data-table]').innerHTML = tablaPaises();
+    main.querySelectorAll('[data-meetings] .reveal, [data-table] .reveal').forEach((n) => n.classList.add('is-in'));
   };
+  bindLightbox(main.querySelector('[data-afiches]'), AFICHES.map((a) => ({ img: a.img, alt: a.alt, pie: a.pie })));
   bindCountrySelector(main, refresh);
   return startCountdowns(main, refresh);
 }

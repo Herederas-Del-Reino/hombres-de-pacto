@@ -17,6 +17,17 @@ export const encuentros = [
     enlace: null,
   },
   {
+    id: 'valientes',
+    nombre: 'Entre Valientes',
+    descripcion: 'Un espacio de formación, reflexión y hermandad.',
+    dias: [2],
+    hora: 20,
+    minuto: 0,
+    duracionMin: 60,
+    icono: 'Sword',
+    enlace: null,
+  },
+  {
     id: 'salmos',
     nombre: 'Salmos',
     descripcion: 'Juntos en adoración a través de la Palabra.',
@@ -33,4 +44,9 @@ export const paises = [
   { id: 'ES', nombre: 'España', zona: 'Europe/Madrid', nota: 'Hora peninsular' },
   { id: 'CO', nombre: 'Colombia', zona: 'America/Bogota', nota: 'Hora de Colombia' },
   { id: 'AR', nombre: 'Argentina', zona: 'America/Argentina/Buenos_Aires', nota: 'Hora de Argentina' },
+  { id: 'MX', nombre: 'México (CDMX)', zona: 'America/Mexico_City', nota: 'Hora del centro de México' },
+  { id: 'PE', nombre: 'Perú', zona: 'America/Lima', nota: 'Hora de Perú' },
+  { id: 'CL', nombre: 'Chile', zona: 'America/Santiago', nota: 'Hora de Chile' },
+  { id: 'GB', nombre: 'Reino Unido', zona: 'Europe/London', nota: 'Hora del Reino Unido' },
+  { id: 'EU', nombre: 'Alemania, Francia e Italia', zona: 'Europe/Berlin', nota: 'Hora de Europa central' },
 ];
