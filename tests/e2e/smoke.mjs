@@ -158,7 +158,7 @@ try {
     assert.ok(cards.includes(co[1]) && cards.includes(co[2]), `${label}: tarjetas Colombia`);
     assert.ok((await page.locator('.dst-note').innerText()).includes(label));
     const next = await page.locator('[data-next]').innerText();
-    assert.match(next, /Salmos/); // lunes por la mañana en España → Salmos
+    assert.match(next, /Berea/); // lunes por la mañana en España → Berea
     await page.reload(); await page.waitForSelector('.view');
     assert.ok(await page.locator('input[value="CO"]').isChecked(), 'país guardado');
     ok(`horarios ${label}: España, Colombia y Argentina correctos; país persistente`);

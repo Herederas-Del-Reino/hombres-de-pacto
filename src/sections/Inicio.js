@@ -117,7 +117,7 @@ export function render(main) {
           <span class="tile__body">
             <span class="tile__tag">${icon('Calendar', { size: 16 })} Cada semana</span>
             <span class="tile__title">Nuestros Encuentros</span>
-            <span class="tile__times"><b>5:00</b> a. m. <i>Martes · Devocional de Madrugada</i> <b>8:00</b> p. m. <i>Martes · Entre Valientes</i> <b>8:00</b> p. m. <i>Lunes a viernes · Salmos</i></span>
+            <span class="tile__times"><b>8:00</b> p. m. <i>Lunes y viernes · Berea</i> <b>8:00</b> p. m. <i>Martes · Entre Valientes</i> <b>5:00</b> a. m. <i>Martes · Devocional de Madrugada</i></span>
             <span class="tile__text">Hora de España · se adapta a tu país.</span>
           </span>
         </a>

@@ -33,7 +33,7 @@ test('hay 7 devocionales completos con dos partes', () => {
 
 test('encuentros y países usan zonas IANA válidas y no inventan enlaces', () => {
   assert.equal(encuentros.length, 3);
-  assert.deepEqual(encuentros.map((e) => e.id), ['devocional', 'valientes', 'salmos']);
+  assert.deepEqual(encuentros.map((e) => e.id), ['berea', 'valientes', 'devocional']);
   encuentros.forEach((e) => assert.equal(e.enlace, null));
   paises.forEach((p) => assert.doesNotThrow(() => new Intl.DateTimeFormat('es', { timeZone: p.zona })));
   assert.deepEqual(paises.slice(0, 3).map((p) => p.zona), ['Europe/Madrid', 'America/Bogota', 'America/Argentina/Buenos_Aires']);

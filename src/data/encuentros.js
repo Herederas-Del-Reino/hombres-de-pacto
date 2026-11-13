@@ -6,11 +6,11 @@
  */
 export const encuentros = [
   {
-    id: 'devocional',
-    nombre: 'Devocional de Madrugada',
-    descripcion: 'Comenzamos el día en la presencia de Dios.',
-    dias: [2],
-    hora: 5,
+    id: 'berea',
+    nombre: 'Berea',
+    descripcion: 'Un tiempo de enseñanza, reflexión y crecimiento en la Palabra.',
+    dias: [1, 5],
+    hora: 20,
     minuto: 0,
     duracionMin: 60,
     icono: 'BookOpen',
@@ -19,7 +19,7 @@ export const encuentros = [
   {
     id: 'valientes',
     nombre: 'Entre Valientes',
-    descripcion: 'Un espacio de formación, reflexión y hermandad.',
+    descripcion: 'Un encuentro de hombres para fortalecer la fe, el carácter y el propósito.',
     dias: [2],
     hora: 20,
     minuto: 0,
@@ -28,14 +28,14 @@ export const encuentros = [
     enlace: null,
   },
   {
-    id: 'salmos',
-    nombre: 'Salmos',
-    descripcion: 'Juntos en adoración a través de la Palabra.',
-    dias: [1, 2, 3, 4, 5],
-    hora: 20,
+    id: 'devocional',
+    nombre: 'Devocional de Madrugada',
+    descripcion: 'Comenzamos el día en la presencia de Dios.',
+    dias: [2],
+    hora: 5,
     minuto: 0,
     duracionMin: 60,
-    icono: 'Crown',
+    icono: 'Sun',
     enlace: null,
   },
 ];

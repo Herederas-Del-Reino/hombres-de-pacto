@@ -373,3 +373,5 @@
   .times-table--paises td .times-table__days { display: inline; margin-left: auto; }
   .times-table--paises td strong { display: inline; font-size: 1rem; }
 }
+
+.posters:has(> :only-child) { grid-template-columns: 1fr; max-width: 560px; }

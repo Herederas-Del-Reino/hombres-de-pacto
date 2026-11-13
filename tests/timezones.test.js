@@ -6,7 +6,7 @@ import {
 import { encuentros } from '../src/data/encuentros.js';
 
 const devocional = encuentros.find((e) => e.id === 'devocional');
-const salmos = encuentros.find((e) => e.id === 'salmos');
+const berea = encuentros.find((e) => e.id === 'berea');
 const CO = 'America/Bogota';
 const AR = 'America/Argentina/Buenos_Aires';
 const ES = 'Europe/Madrid';
@@ -25,17 +25,17 @@ test('tabla de invierno español', () => {
   assert.deepEqual(pick(horarioSemanal(devocional, ES, INVIERNO)), ['Martes', '5:00 a. m.']);
   assert.deepEqual(pick(horarioSemanal(devocional, CO, INVIERNO)), ['Lunes', '11:00 p. m.']);
   assert.deepEqual(pick(horarioSemanal(devocional, AR, INVIERNO)), ['Martes', '1:00 a. m.']);
-  assert.deepEqual(pick(horarioSemanal(salmos, ES, INVIERNO)), ['Lunes a viernes', '8:00 p. m.']);
-  assert.deepEqual(pick(horarioSemanal(salmos, CO, INVIERNO)), ['Lunes a viernes', '2:00 p. m.']);
-  assert.deepEqual(pick(horarioSemanal(salmos, AR, INVIERNO)), ['Lunes a viernes', '4:00 p. m.']);
+  assert.deepEqual(pick(horarioSemanal(berea, ES, INVIERNO)), ['Lunes y viernes', '8:00 p. m.']);
+  assert.deepEqual(pick(horarioSemanal(berea, CO, INVIERNO)), ['Lunes y viernes', '2:00 p. m.']);
+  assert.deepEqual(pick(horarioSemanal(berea, AR, INVIERNO)), ['Lunes y viernes', '4:00 p. m.']);
 });
 
 test('tabla de verano español', () => {
   assert.deepEqual(pick(horarioSemanal(devocional, ES, VERANO)), ['Martes', '5:00 a. m.']);
   assert.deepEqual(pick(horarioSemanal(devocional, CO, VERANO)), ['Lunes', '10:00 p. m.']);
   assert.deepEqual(pick(horarioSemanal(devocional, AR, VERANO)), ['Martes', '12:00 a. m.']);
-  assert.deepEqual(pick(horarioSemanal(salmos, CO, VERANO)), ['Lunes a viernes', '1:00 p. m.']);
-  assert.deepEqual(pick(horarioSemanal(salmos, AR, VERANO)), ['Lunes a viernes', '3:00 p. m.']);
+  assert.deepEqual(pick(horarioSemanal(berea, CO, VERANO)), ['Lunes y viernes', '1:00 p. m.']);
+  assert.deepEqual(pick(horarioSemanal(berea, AR, VERANO)), ['Lunes y viernes', '3:00 p. m.']);
 });
 
 test('cambio de hora de marzo de 2027 (domingo 28): el martes siguiente ya usa verano', () => {
@@ -48,27 +48,27 @@ test('cambio de hora de marzo de 2027 (domingo 28): el martes siguiente ya usa v
 test('cambio de hora de octubre de 2026 (domingo 25): vuelve a invierno', () => {
   const antes = zonedToUtc(2026, 10, 19, 9, 0, ES);
   const despues = zonedToUtc(2026, 10, 26, 9, 0, ES);
-  assert.equal(formatear(proximasOcurrencias(salmos, antes)[0], AR).hora, '3:00 p. m.');
-  assert.equal(formatear(proximasOcurrencias(salmos, despues)[0], AR).hora, '4:00 p. m.');
+  assert.equal(formatear(proximasOcurrencias(berea, antes)[0], AR).hora, '3:00 p. m.');
+  assert.equal(formatear(proximasOcurrencias(berea, despues)[0], AR).hora, '4:00 p. m.');
 });
 
-test('próximo encuentro: lunes por la mañana → Salmos del lunes a las 20:00', () => {
+test('próximo encuentro: lunes por la mañana → Berea del lunes a las 20:00', () => {
   const n = proximoEncuentro(encuentros, INVIERNO);
-  assert.equal(n.encuentro.id, 'salmos');
+  assert.equal(n.encuentro.id, 'berea');
   const f = formatear(n.fecha, ES);
   assert.equal(f.dia, 'lunes');
   assert.equal(f.hora, '8:00 p. m.');
 });
 
-test('próximo encuentro: lunes 21:30 (tras empezar Salmos y pasada su hora) → devocional del martes', () => {
+test('próximo encuentro: lunes 21:30 (tras empezar Berea y pasada su hora) → devocional del martes', () => {
   const n = proximoEncuentro(encuentros, zonedToUtc(2027, 1, 11, 21, 30, ES));
   assert.equal(n.encuentro.id, 'devocional');
   assert.equal(formatear(n.fecha, ES).dia, 'martes');
 });
 
-test('próximo encuentro: viernes 22:00 → Salmos del lunes (fin de semana sin encuentros)', () => {
+test('próximo encuentro: viernes 22:00 → Berea del lunes (fin de semana sin encuentros)', () => {
   const n = proximoEncuentro(encuentros, zonedToUtc(2027, 1, 15, 22, 0, ES));
-  assert.equal(n.encuentro.id, 'salmos');
+  assert.equal(n.encuentro.id, 'berea');
   assert.equal(formatear(n.fecha, ES).dia, 'lunes');
 });
 

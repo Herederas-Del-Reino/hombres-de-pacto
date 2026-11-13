@@ -11,8 +11,7 @@ import {
 export const meta = { title: 'Nuestros Encuentros' };
 
 const AFICHES = [
-  { img: 'afiche-horarios', h: 770, pie: 'Afiche oficial · Hora España', alt: 'Afiche Nuestros Encuentros en hora de España: Devocional de Madrugada martes 5:00 a. m., Entre Valientes martes 8:00 p. m. y Salmos de lunes a viernes 8:00 p. m.' },
-  { img: 'afiche-horarios-internacional', h: 770, pie: 'Horario en tu país', alt: 'Afiche Nuestros Encuentros con horarios por país: Alemania, Francia e Italia, Reino Unido, Colombia y Perú, México y Argentina y Chile' },
+  { img: 'afiche-horarios-encuentros', h: 711, pie: 'Horarios de nuestros encuentros · Hora Europa (España)', alt: 'Afiche Horarios de Nuestros Encuentros: Berea lunes y viernes 8:00 p. m., Entre Valientes martes 8:00 p. m. y Devocional de Madrugada martes 5:00 a. m., hora de Europa (España), con los horarios por país' },
 ];
 
 function meetingCards() {
