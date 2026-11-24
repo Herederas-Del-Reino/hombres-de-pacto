@@ -30,7 +30,7 @@ export function render(main) {
 
   main.innerHTML = `
   <section class="hero3" aria-labelledby="page-title">
-    ${scene('amanecer', { className: 'hero3__scene', eager: true, parallax: 0.35 })}
+    ${scene('portada', { className: 'hero3__scene', eager: true, parallax: 0.2 })}
     <div class="hero3__veil" aria-hidden="true"></div>
     ${ornaments()}
     <div class="container hero3__grid">

@@ -406,3 +406,20 @@
   }
   .hero3__verse { background: rgba(11, 13, 16, .55); backdrop-filter: blur(4px); border-radius: 4px; }
 }
+
+
+/* =====================================================================
+   PORTADA SÓLIDA: escena opaca (negros profundos), sin velos lavados ni
+   elementos translúcidos. Solo un degradado inferior para unir con la página.
+   ===================================================================== */
+.hero3 { background: #07080b; }
+.hero3__scene .scene__img { filter: none; animation: none; }
+.hero3__veil { background: linear-gradient(180deg, rgba(7, 8, 11, .55) 0%, transparent 18%, transparent 78%, #0B0D10 100%) !important; }
+.hero3__mark::before { background: radial-gradient(closest-side, rgba(7, 8, 11, .6), transparent) !important; }
+.hero3__ctas .btn--outline { background: #120d09 !important; backdrop-filter: none !important; border-color: var(--oro); }
+.hero3__ctas .btn--outline:hover { background: #1d150e !important; }
+.hero3__verse { background: #0d0a08 !important; backdrop-filter: none !important; border: 1px solid rgba(212, 175, 55, .45) !important; }
+.hero3 .dust i { opacity: .55; }
+@media (min-width: 960px) {
+  .hero3__veil { background: linear-gradient(90deg, transparent 45%, rgba(7, 8, 11, .35) 62%, transparent 92%), linear-gradient(180deg, rgba(7, 8, 11, .55) 0%, transparent 18%, transparent 78%, #0B0D10 100%) !important; }
+}

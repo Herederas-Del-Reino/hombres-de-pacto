@@ -213,3 +213,13 @@ render('resplandor', W, H,
        sun=dict(x=.5, y=.66, r=.02, color='#ffd08a', power=1.1), haze='#d88a48', rays=.7,
        layers=[dict(y=.7, amp=.24, color='#6a3a20', haze=.5, rim=.8), dict(y=.82, amp=.2, color='#331b10', haze=.25, rim=.4), dict(y=.96, amp=.12, color='#150c07', haze=.05)],
        fog=[(0, .74, .04, '#f2a860', .45)], seed=55)
+
+# Portada: cinematográfica y opaca (negros profundos, sol a la derecha, sin neblina lavada)
+render('portada', 2200, 1200,
+       sky=[(0, '#07080b'), (.38, '#1a120c'), (.58, '#5a3316'), (.7, '#c47a2c'), (.78, '#f2b25a'), (1, '#f7cf86')],
+       sun=dict(x=.8, y=.62, r=.016, color='#ffd98c', power=1.05), haze='#7a4a22', rays=.4,
+       layers=[dict(y=.7, amp=.22, color='#3a2516', haze=.35, rim=1.1, rimw=4, peak=(.9, .05), texture=.3),
+               dict(y=.8, amp=.24, color='#21160e', haze=.18, rim=.7, texture=.3),
+               dict(y=.9, amp=.2, color='#120c08', haze=.06, rim=.35, texture=.3),
+               dict(y=1.0, amp=.16, color='#07060a', haze=0, rim=.15, texture=.25)],
+       fog=[(0, .76, .025, '#e0954a', .3)], seed=77, warmth=1.2)
