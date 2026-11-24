@@ -375,3 +375,34 @@
 }
 
 .posters:has(> :only-child) { grid-template-columns: 1fr; max-width: 560px; }
+
+
+/* =====================================================================
+   PORTADA CINEMATOGRÁFICA: fondo más oscuro y contrastado (como la imagen
+   oficial para redes), luz del amanecer solo como acento y texto legible.
+   ===================================================================== */
+.hero3__scene .scene__img { filter: brightness(.58) contrast(1.15) saturate(1.1) sepia(.12); }
+.hero3__veil {
+  background:
+    radial-gradient(45% 55% at 82% 42%, rgba(255, 196, 110, .12), transparent 70%),
+    linear-gradient(180deg, rgba(11, 13, 16, .7) 0%, rgba(11, 13, 16, .25) 28%, rgba(11, 13, 16, .45) 70%, var(--carbon) 100%);
+}
+.hero3__mark { position: relative; }
+.hero3__mark::before { content: ''; position: absolute; inset: -16% -20%; z-index: -1; pointer-events: none; background: radial-gradient(closest-side, rgba(11, 13, 16, .7), rgba(11, 13, 16, .3) 60%, transparent); }
+.hero3__logo { filter: drop-shadow(0 20px 40px rgba(0, 0, 0, .8)) drop-shadow(0 0 30px rgba(255, 190, 90, .22)); }
+.hero3__kicker { color: var(--oro); }
+.hero3__lema { color: #fff6e6; text-shadow: 0 1px 2px rgba(0, 0, 0, .9), 0 0 18px rgba(0, 0, 0, .8); }
+.hero3__frase, .hero3__kicker, .hero3__verse p, .hero3__verse cite, .hero3__ctas .link-arrow { text-shadow: 0 1px 2px rgba(0, 0, 0, .9), 0 0 16px rgba(0, 0, 0, .75); }
+.hero3__pre { text-shadow: 0 2px 14px rgba(0, 0, 0, .9); }
+.hero3__title { filter: drop-shadow(0 4px 18px rgba(0, 0, 0, .85)); }
+.hero3__ctas .btn--outline { background: rgba(11, 13, 16, .55); backdrop-filter: blur(4px); }
+.hero3 .dust i { opacity: .7; }
+@media (min-width: 960px) {
+  .hero3__veil {
+    background:
+      radial-gradient(38% 55% at 28% 50%, rgba(255, 186, 96, .2), transparent 70%),
+      linear-gradient(90deg, rgba(11, 13, 16, .35) 0%, rgba(11, 13, 16, .3) 40%, rgba(11, 13, 16, .72) 60%, rgba(11, 13, 16, .8) 100%),
+      linear-gradient(180deg, rgba(11, 13, 16, .55) 0%, transparent 24%, transparent 70%, var(--carbon) 100%);
+  }
+  .hero3__verse { background: rgba(11, 13, 16, .55); backdrop-filter: blur(4px); border-radius: 4px; }
+}
